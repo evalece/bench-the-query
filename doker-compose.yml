@@ -1,0 +1,37 @@
+
+version: "3.9"
+
+services:
+  redis:
+    image: redis:7
+    ports:
+      - "${REDIS_PORT:-6379}:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - backend
+
+  benchmark:
+    env_file:
+    - path: ./env
+
+    build: ./app
+    depends_on:
+      - redis
+    volumes:
+      - ./app:/app
+      - ./results:/app/df_final_features.csv    # Live dev mount
+      - ./results:/app/results  # Output mount (metrics)
+    networks:
+      - backend
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+
+
+
+networks:
+  backend:
+
+volumes:
+  redis_data:
