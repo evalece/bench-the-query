@@ -20,7 +20,7 @@ services:
       - redis
     volumes:
       - ./app:/app
-      - ./results:/app/df_final_features.csv    # Live dev mount
+      #- ./results:/app/df_final_features.    # Live dev mount
       - ./results:/app/results  # Output mount (metrics)
     networks:
       - backend
