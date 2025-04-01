@@ -40,6 +40,12 @@ First working version coming soon!
 
 ## Reference
 1.Dataset: https://www.kaggle.com/datasets/rohanadagouda/cleaned-dataset 
+2.Batch Redis data loading using Riot: https://redis.github.io/riot/#_importing 
+3.Docker compose dependency and other options: https://docs.docker.com/compose/how-tos/startup-order/  
+
+
+# Dependency in runtime
+1.Riot depeds on Redis in the same docker compose
 
 ##  License
 
