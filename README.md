@@ -5,25 +5,24 @@
 # 1. Grammar and proof read of document writing. 
 # 2. Readability of ReadMe and comments. 
 # 3. Paraphrasing 80% first version of readme after techincal discussion. 
-# REST vs GraphQL Benchmark Suite 
+#  
 
-This is a benchmarking tool that compares the performance of REST and GraphQL in a microservices setting. 
 
-Advance toolset includes optimization fine tuning and analysis on performace under different DB strategies and frameworks in a Cloud-Native setting. 
+This is a benchmarking tool that helps investigate protocol and database performaances trade offs in a noiseless environment as it offers: 
 
-##  What This Project Does
+1. Setting of Control and Change Variable
+2. Allow transparent network settings and/ or complications (which would lead to potential bias).
+3. Query-type Focus Benchmarking 
+4. Optional tool assiting in converting bulk import of dataset into database in a database-as-change-variable benchmark test. 
 
-- Run REST and GraphQL services side by side
-- Support multiple databases (MongoDB, Redis, etc.)
-- Test sorting methods (server-side, client-side, Redis sorted sets)
-- Allow users to configure test scenarios and see live results
 
-##  Planned Features
+##  Planned Features (In development now since March 28, 2025)
+![alt text] (https://github.com/evalece/bench-the-query/blob/main/scheme.png)
+-Bench marking with 2 options
+-1.Protocol as Change Variable
+-2.Databse as Change Variable 
 
-- CLI or config-based setup
-- Locust-based benchmarking
-- Plug-in architecture for custom tasks
-- Optional dashboard or result logging
+Planed Development 
 
 ## Technologies
 
@@ -35,7 +34,7 @@ Advance toolset includes optimization fine tuning and analysis on performace und
 
 ## Status
 
- Project in active development.  
+Project in active development.  
 First working version coming soon!
 
 ## Reference
