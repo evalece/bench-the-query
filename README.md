@@ -11,7 +11,7 @@ This is a benchmarking tool that helps investigate protocol and database perform
 
 
 ##  Planned Features (In development now since March 28, 2025)
-![schematic] (https://github.com/evalece/bench-the-query/blob/main/scheme.png)
+![schematic](scheme.jpg)
 - Bench marking with 2 options
 - 1.Protocol as Change Variable
 - 2.Databse as Change Variable 
