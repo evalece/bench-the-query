@@ -35,6 +35,8 @@ First working version coming soon!
  1. Dataset: https://www.kaggle.com/datasets/rohanadagouda/cleaned-dataset 
  2. Batch Redis data loading using Riot: https://redis.github.io/riot/#_importing 
  3. Docker compose dependency and other options: https://docs.docker.com/compose/how-tos/startup-order/  
+ 4. Redis Pipeline: https://redis.io/docs/latest/develop/use/pipelining/ Our case: Allow a toggle on/off to observe RTT effect
+ 5. Redis SSL/TLS: https://redis.io/docs/latest/operate/rs/security/encryption/tls/enable-tls/ (Unable to test for now due to Enterprise)
 
 
 
