@@ -3,31 +3,24 @@ version: "3.9"
 
 services:
 
-
   redis:
-    image: redis:7
+    image: redis
     ports:
       - "6380:6379"
+#    develop:
+#      watch:
+#        - action: sync
+#          path: /
+#          target: /log
     volumes:
-      - redis_data:/data 
-      - ./redis_default_data  #Mount to host, to output redis config
+        - redis_data:/data 
+        - ./redis_default_data  #Mount to host, to output redis config
     networks:
-      - bench_the_query # to be replaced by an API Gateway or VPN-like layer in the future modular tests ###Futrue
+        - bench_the_query # to be replaced by an API Gateway or VPN-like layer in the future modular tests ###Futrue
 
 
 
 
-  riot:
-    image: riotx/riot:v4.1.3
-    container_name: riot-container
-    volumes:
-      - ./app/data/df_final_features.json:/data:ro # bind mount json from local host
-    depends_on:
-      - redis
-    environment:
-      - REDIS_HOST=redis
-      - REDIS_PORT=6379
-    command: import /data/df_final_features.json --redis-host redis --redis-port 6379
 
 volumes:
   redis_data:  # Declare a named volume for Redis to store its data
@@ -35,25 +28,6 @@ networks:
     bench_the_query:
         external: false
 
-
-  # benchmark:
-  #   env_file:
-  #   - path: ./env
-
-  #   build: ./app
-  #   depends_on:
-  #     - redis
-  #   volumes:
-  #     - ./app:/app
-  #     #- ./results:/app/df_final_features.    # Live dev mount
-  #     - ./results:/app/results  # Output mount (metrics)
-  #   networks:
-  #     - bench_the_query # to be replaced by an API Gateway or VPN-like layer in the future modular tests ###Futrue
-  #   environment:
-  #     - REDIS_HOST=redis
-  #     - REDIS_PORT=6379
-  #   networks:
-  #     - bench_the_query # to be replaced by an API Gateway or VPN-like layer in the future modular tests ###Futrue
 
 
 
