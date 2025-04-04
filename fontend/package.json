@@ -1,0 +1,24 @@
+{
+  "name": "fontend",
+  "version": "1.0.0",
+  "main": "redis_auto_query.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/redis_auto_query.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "redis": "^4.6.7"
+  },  
+  "devDependencies": {
+    "@types/node": "^18.18.8",
+    "typescript": "^5.4.3"
+  }
+  
+  
+}
+
