@@ -11,11 +11,11 @@ Methology (Query-Focus, testing for week of April 07, 2025):
  3. Storage-TTL:set forever for now, allow DB with least complexity.
 
  Performance + Stress Test + Edge Case Analysis :
- 4. Chunk data query- latency, fault tolerance. 
- 5. Efficient data - increase overhead: content ratio by all means, test latency, fault tolerance
- 
+ 1. Chunk data query- latency, fault tolerance. 
+ 2. Efficient data - increase overhead: content ratio by all means, test latency, fault tolerance
+
  Bottleneck Test :
- 6.  GraphQL API endpoint vs Distributed REST (thought: data coming back: if at the same time, bottleneck might be on client)
+ 1.  GraphQL API endpoint vs Distributed REST (thought: data coming back: if at the same time, bottleneck might be on client)
 
 
 
