@@ -37,7 +37,7 @@ First working version coming soon!
  3. Docker compose dependency and other options: https://docs.docker.com/compose/how-tos/startup-order/  
  4. Redis Pipeline: https://redis.io/docs/latest/develop/use/pipelining/ Our case: Allow a toggle on/off to observe RTT effect
  5. Redis SSL/TLS: https://redis.io/docs/latest/operate/rs/security/encryption/tls/enable-tls/ (Unable to test for now due to Enterprise)
-
+ 4. Stanford CS244B Reading material, A.D Birrell and B.J Nelson: https://www.scs.stanford.edu/17au-cs244b/sched/readings/birrell_rpc.pdf 
 
 
 
@@ -49,6 +49,8 @@ ChatGPT assistance in:
  1. Grammar and proof read of document writing. 
  2. Readability of ReadMe and comments. 
  3. Paraphrasing 80% first version of readme after techincal discussion. 
+
+
 
 CC BY-NC 4.0
 
