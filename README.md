@@ -1,6 +1,24 @@
 
 # Bench-the-query
 
+Introduction:
+RPC were first considered not an ideal tool for chunk data transmissions but rather efficient in pre-defined data structure data exchanges. [5]. It was observed that in recent years, API protocols such as GraphQL has lifted the limitation of REST API by accessing multiple queries on one API call (while placing GraphQL as a API endpoint for data exchange [7]). This project, though not a research paper nor thesis statement, wishes to dive into the performance metrics on these powerful technologies. 
+
+Methology (Query-Focus, testing for week of April 07, 2025):
+(To be pretty format later, no time now)
+ 1. Cold start-Set no cache on Database to simulate cold start
+ 2. Cold start-Query with random draw ID on NoSQL
+ 3. Storage-TTL:set forever for now, allow DB with least complexity.
+
+ Performance + Stress Test + Edge Case Analysis :
+ 4. Chunk data query- latency, fault tolerance. 
+ 5. Efficient data - increase overhead: content ratio by all means, test latency, fault tolerance
+ 
+ Bottleneck Test :
+ 6.  GraphQL API endpoint vs Distributed REST (thought: data coming back: if at the same time, bottleneck might be on client)
+
+
+
 
 This is a benchmarking tool that helps investigate protocol and database performaances trade offs in a noiseless environment as it offers: 
 
@@ -12,7 +30,7 @@ This is a benchmarking tool that helps investigate protocol and database perform
 
 ##  Planned Features (In development now since March 28, 2025)
 ![schematic](scheme.jpg)
-- Bench marking with 2 options
+- Benchmarking with 2 options
     1.Protocol as Change Variable
     2.Databse as Change Variable 
 
@@ -37,7 +55,8 @@ First working version coming soon!
  3. Docker compose dependency and other options: https://docs.docker.com/compose/how-tos/startup-order/  
  4. Redis Pipeline: https://redis.io/docs/latest/develop/use/pipelining/ Our case: Allow a toggle on/off to observe RTT effect
  5. Redis SSL/TLS: https://redis.io/docs/latest/operate/rs/security/encryption/tls/enable-tls/ (Unable to test for now due to Enterprise)
- 4. Stanford CS244B Reading material, A.D Birrell and B.J Nelson: https://www.scs.stanford.edu/17au-cs244b/sched/readings/birrell_rpc.pdf 
+ 6. A. D. Birrell, B. J. Nelson, and Xerox Palo Alto Research Center, “Implementing remote procedure calls,” Feb. 1984. [Online].   Available: http://birrell.org/andrew/papers/ImplementingRPC.pdf
+ 7. GraphQL as API endpoint https://graphql.org/faq/best-practices/ 
 
 
 

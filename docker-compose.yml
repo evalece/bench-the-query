@@ -5,6 +5,7 @@ services:
 
   redis:
     image: redis
+    #commend: 
     ports:
       - "6380:6379"
 #    develop:
