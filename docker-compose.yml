@@ -1,4 +1,6 @@
-
+# Docker compose for Redis
+# Localhost with blindmount at ./redis_presist 
+# 
 version: "3.9"
 
 services:
@@ -13,9 +15,20 @@ services:
 #        - action: sync
 #          path: /
 #          target: /log
-    volumes:
-        - redis_data:/data 
-        - ./redis_default_data  #Mount to host, to output redis config
+    volumes: # tip: docker volume prune -f to clear docker cached volumes
+      #initial setip (for later: wired by script)
+      #redis-cli -h localhost -p 6379 < ./import_users.redis   
+      #redis-cli -h localhost -p 6380 CONFIG GET * > redis_runtime.conf
+      - ./redis_presist:/opt/app/static 
+
+      - redis_data:/data  # Other Redis/ non-user defined data 
+      # Alternative syntax ref
+      #- type: bind # To place redis config, Redis AOF or shared localhost files. 
+      #  source: ./redis_presist # dataset  source: https://github.com/redis-developer/redis-datasets/blob/master/user-database/README.md
+      #  target: /opt/app/static
+
+      # for later: add flush cache.sh
+
     networks:
         - bench_the_query # to be replaced by an API Gateway or VPN-like layer in the future modular tests ###Futrue
 
@@ -24,7 +37,7 @@ services:
 
 
 volumes:
-  redis_data:  # Declare a named volume for Redis to store its data
+  redis_data:  # container & non-user setting data
 networks:
     bench_the_query:
         external: false

@@ -1,10 +1,10 @@
 
 # Bench-the-query
 
-Introduction:
+##Introduction:
 RPC were first considered not an ideal tool for chunk data transmissions but rather efficient in pre-defined data structure data exchanges. [5]. It was observed that in recent years, API protocols such as GraphQL has lifted the limitation of REST API by accessing multiple queries on one API call (while placing GraphQL as a API endpoint for data exchange [7]). This project, though not a research paper nor thesis statement, wishes to dive into the performance metrics on these powerful technologies. 
 
-Methology (Query-Focus, testing for week of April 07, 2025):
+##Methology (Query-Focus, testing for week of April 07, 2025):
 (To be pretty format later, no time now)
  1. Cold start-Set no cache on Database to simulate cold start
  2. Cold start-Query with random draw ID on NoSQL
@@ -18,7 +18,11 @@ Methology (Query-Focus, testing for week of April 07, 2025):
  1.  GraphQL API endpoint vs Distributed REST (thought: data coming back: if at the same time, bottleneck might be on client)
 
 
+##Test environment:
+Java (Redis i/o + Predefined GraphQL query & return data type) <=> GraphQL server (API end point) => Redis [7]
 
+
+Java + Spring  <=> Redis [8]
 
 This is a benchmarking tool that helps investigate protocol and database performaances trade offs in a noiseless environment as it offers: 
 
@@ -57,7 +61,8 @@ First working version coming soon!
  5. Redis SSL/TLS: https://redis.io/docs/latest/operate/rs/security/encryption/tls/enable-tls/ (Unable to test for now due to Enterprise)
  6. A. D. Birrell, B. J. Nelson, and Xerox Palo Alto Research Center, “Implementing remote procedure calls,” Feb. 1984. [Online].   Available: http://birrell.org/andrew/papers/ImplementingRPC.pdf
  7. GraphQL as API endpoint https://graphql.org/faq/best-practices/ 
-
+ 8. For REST; Java+Spring- https://redis.io/learn/develop/java/redis-and-spring-course/lesson_2 
+ 9. Redis Dataset: https://github.com/redis-developer/redis-datasets 
 
 
 ##  License

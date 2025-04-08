@@ -1,7 +1,9 @@
 import csv
 import json
 import os
-
+# Dev Priority: mid low
+# Automation #Script #CLI
+# For later: this allows user to parse valid csv data;
 def csv_to_json(csv_filename_original, json_filename, csv_filename, n):
     # Read from the original CSV
     with open(csv_filename_original, mode='r', newline='', encoding='utf-8') as csv_file:
