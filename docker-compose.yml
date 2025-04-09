@@ -24,7 +24,7 @@ services:
       - redis_data:/data  # Other Redis/ non-user defined data 
       # Alternative syntax ref
       #- type: bind # To place redis config, Redis AOF or shared localhost files. 
-      #  source: ./redis_presist # dataset  source: https://github.com/redis-developer/redis-datasets/blob/master/user-database/README.md
+
       #  target: /opt/app/static
 
       # for later: add flush cache.sh
