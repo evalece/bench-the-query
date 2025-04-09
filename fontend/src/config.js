@@ -1,6 +1,6 @@
 // subject to script control
-module.exports = {
-    Redis_URL: 'redis://localhost:6379',
-    DB_NAME: '',
-    PORT: ,
-  };
+export default  {
+    Redis_URL: "redis://localhost:6380",
+    GraphQLPort: 4000
+
+  }

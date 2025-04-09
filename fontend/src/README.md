@@ -11,6 +11,9 @@ With Redis + Apollo GraphQL:
  https://www.youtube.com/watch?v=w_M8XOw-ltA 
  https://www.youtube.com/watch?v=FRYckPDZ_b4&feature=youtu.be 
 
+GraphQL resolver+schema:
+https://www.apollographql.com/docs/apollo-server/schema/schema 
+
 ## Test Dataset
   User dataset & schema source: https://github.com/redis-developer/redis-datasets/blob/master/user-database/README.md
   -uses user id as key

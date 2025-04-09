@@ -1,17 +1,12 @@
 export default {
-    //update  schema if any changes
-    // tut: 13:00-14:00
+// Resolver from Query function x: do sub query using parent.y or grab arg from input 
     Query: {
-        state: async (parent, args, context) => {
-            let { state } =args
-            let { testData }= context.datasources
-            return await  testData.fetchState(state)
+        getUserById: async (parent, args, context) => {
+            let { id } =args
+            let { testData }= context.dataSources
+            return await  testData.fetchid(id)
 
       }
-// Default behaviour are commented out, but for reference//
-//    },
-//     State: {
-//        name: parent => parent.name
-//         abbreviation: parent => parent.abbreviation
+
      }
 }

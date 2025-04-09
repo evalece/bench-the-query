@@ -3,18 +3,32 @@ import  { gql } from 'apollo-server'
 //update resolver if any changes
 
 
-// type Query {
-//     field: field_type (i.e., Character) //for later, check if type can optimize further: https://graphql.org/learn/schema/ 
-//   }
+//GraphQL stress test: use type Query to return large size data; Query type def: https://graphql.org/learn/schema/ 
 
+//getUserById is a function, takes id as query input, and return User as result
 export default gql `
 type Query {
-    state(state: String!): State 
+    getUserById(id: String!): User
 }
 
-type State {
-    name: String
-    abbreviation: String 
+type User {
+    id: String
+    first_name : String
+    last_name : String
+    email : String
+    gender : String
+    ip_address : String
+    country : String
+    country_code : String
+    city : String
+    longitude : String
+    latitude : String
+    last_login : String    
 }
+
+
+
+
+
 
 `
