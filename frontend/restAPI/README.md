@@ -1,0 +1,25 @@
+### REST API: 
+# Implementation
+
+Customized REST API wrapper as API endpoint for containerized Redis, whose operations are intentionally set to compared with GraphQL. 
+
+
+Tools: FastAPI 
+Language: Python 
+
+
+# Goal
+Potential next step: compare with lower level such as Thrift and gRPC, validating how 
+JSON overhead vs type annotation has improved performance.
+
+Then in GraphQL vs REST, check how both performed while using their schema and access method.
+
+# Methology
+Simulate by  GET-heavy, write-heavy, GET-light, write-light, permuted with frequent access or mixed loads.
+
+# Reference
+pydantic- to toggle is for pre-defined type/  type annotations I/O formatting benchmark 
+https://docs.pydantic.dev/latest/why/#org-cisco //<- Potential next step: compare with lower level such as Thrift and gRPC, validating how 
+JSON overhead vs type annotation has improved performance.
+
+Then in GraphQL vs REST, check how both performed while using their schema and access method.
