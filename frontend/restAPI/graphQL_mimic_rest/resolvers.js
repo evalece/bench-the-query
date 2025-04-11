@@ -3,8 +3,8 @@ export default {
         Query: {
             getUserById: async (parent, args, context) => {
                 let { id } =args
-                let { testData }= context.dataSources
-                return await  testData.fetchid(id)
+                let { graphQLrest }= context.dataSources
+                return await  graphQLrest.fetchid(id)
     
           }
     
