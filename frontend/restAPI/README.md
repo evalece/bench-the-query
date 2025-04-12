@@ -1,4 +1,19 @@
 ### REST API: 
+
+
+To start FastAPI server:
+
+(Optional/O) Ordered Steps:
+
+cd fastAPI
+(O) source venv/bin
+(O) pip3 install requirement.txt (will finallize in soon)
+1. python3 main.py
+2. http://127.0.0.1:8000/   (Unvicorn root)
+3. More info, See fastAPI/README.md
+
+
+
 # Implementation
 
 Customized REST API wrapper as API endpoint for containerized Redis, whose operations are intentionally set to compared with GraphQL. 

@@ -1,5 +1,7 @@
 ### FastAPI & Unvcorn Server in REST API 
 
+## Unvicorn root
+## PYTHONPATH=$(pwd) uvicorn main:app --reload 
 
 ## environment: 
 1. Python3
