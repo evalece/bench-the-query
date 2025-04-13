@@ -63,6 +63,7 @@ First working version coming soon!
  7. GraphQL as API endpoint https://graphql.org/faq/best-practices/ 
  8. For REST; Java+Spring- https://redis.io/learn/develop/java/redis-and-spring-course/lesson_2 
  9. Redis Dataset: https://github.com/redis-developer/redis-datasets 
+ 10. riot https://redis.github.io/riot/#_datagen_struct and fake data gen : https://www.datafaker.net/ 
 
 
 ##  License
