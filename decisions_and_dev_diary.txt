@@ -1,0 +1,50 @@
+
+
+April 13 2025
+Metrics:
+Response time
+Throughput
+Error rates
+
+
+
+I cheked tools like the following but decides to do low level logging and tracking to stay primtive and transparent.
+In addition, we are only looking at API client efficiency in various query length and throughtput with specific protocols... 
+FastAPI with Grafana
+https://dev.to/ken_mwaura1/getting-started-monitoring-a-fastapi-app-with-grafana-and-prometheus-a-step-by-step-guide-3fbn 
+
+
+API request <-> API server (port yyy) <--- (potential propogation delay) ---> (port xxx) Redis DB
+
+We track:
+
+1. query_id
+
+2. client_sent_time
+
+3. server_received_time
+
+4. server_duration
+
+5. redis_duration
+
+6. client_received_time
+
+7. round_trip_time (Propogation delay)
+
+
+
+April 16 2025
+Originally planned to complete this project by  April 14ish, but decided to allocate more time to 
+deliver a smarter script that generates and implements 
+1. client code in GraphQL and REST API accross all benchmark 
+2. automates (optional) data importation to Redis with Lua and is customizable 
+3. (side note for 2.) I'm doing flat datasets for now, no subquery, but will do later 
+
+
+Next up:
+1. Reading: 
+- Concurrency & CPU related topics reading- currently all using asynch non-blocking but need to look into concurrent reques and spike.
+- Present hardware health with latency and other findings (knowing these causes unfairness).
+2. More Writing:
+-Explain potentail unfairness and metigations in my baseline GraphQL REST- mimicing model
