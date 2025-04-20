@@ -15,22 +15,27 @@ router = APIRouter()
 
 
 # hardcoded or config-defined fields # ****for later, import from script settings 
-field_names = [f"var{v}" for v in [3, 5, 10, 15, 30, 50]] 
+#field_names = [f"var{v}" for v in [3, 5, 10, 15, 30, 50]] 
 
-@router.get("/user/{user_id}") # format: /user/{user_id}/field1 field2 .... # for load testing, we assume this must be true
-async def fetch_user(user_id: str,fields: str):
-
-    #check user
-    if not get_user_session(f"user:{user_id}"):
+@router.get("/user/{user_id}")
+async def fetch_user_all(user_id: str):
+    if not get_user_session(user_id):
         raise HTTPException(status_code=404, detail="User not found")
+    return get_user_session(f"user:{user_id}")  # returns full session data
 
+##*** important learning: allow user to ask exactly what they wanted 
+## simply put: dynamic routing 
+@router.get("/user/{user_id}/{fields}")
+async def fetch_user_fields(user_id: str, fields: str):
+    if not get_user_session(user_id):
+        raise HTTPException(status_code=404, detail="User not found")
+    
+    requested_fields = fields.split(" ") 
+    
+    session_data = get_user_fields(user_id, requested_fields)  # assume valid,  format: /user/{user_id}/ field1 field2 ... ### no nevermind 
+    # redis's HMGET takes key field [fields] ANYWAYS 
 
+    if not session_data:
+        raise HTTPException(status_code=404, detail="No matching fields found")
 
-    # if fields:
-    #     # for later, do pydanmics 
-    #     session_data = get_user_fields(user_id, fields)  
-    # if not session_data:
-    #     raise HTTPException(status_code=404, detail="User not found")
-
-    #return {"user_id": user_id, "user": session_data}
-    return {"user_id": user_id}
+    return {"user_id": user_id, "user": session_data}
