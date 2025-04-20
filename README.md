@@ -42,16 +42,25 @@ This is a benchmarking tool that helps investigate protocol and database perform
 
 ### Technologies (no preferred odering, rollout on development basis.)
 
-- FastAPI
+- FastAPI 
 - Ariadne (GraphQL)
-- Redis / MongoDB
-- Locust for load testing
-- (Optional) Docker
+- Redis
+- k6 for load testing
+- Docker
 
 ### Status
 
-Project in active development.  
-First working version coming soon!
+# Key Updates
+1. GraphQL:Comppleted Script injected schema+ resolver
+![schematic](./in-dev-screen/graphQL_query.png)
+2. FastAPI: Completed Hardcoded dynamic API endpoint deployment (i.e. query by optional fields, /user/useid/field 1... n)
+![schematic](./in-dev-screen/dynamic_API_endpoint_Fast_query.png)
+3. Redis test dataset: complete fake data generation via Lua Script + control by script commands (later replaced by docker command)
+![schematic](./in-dev-screen/redis_user.png)
+4. Load test: GraphQL- Completed small load test in K6
+![schematic](./in-dev-screen/graphQL_loadTest.png)
+
+
 
 ## Reference
  1. Dataset: https://www.kaggle.com/datasets/rohanadagouda/cleaned-dataset 
@@ -64,6 +73,9 @@ First working version coming soon!
  8. For REST; Java+Spring- https://redis.io/learn/develop/java/redis-and-spring-course/lesson_2 
  9. Redis Dataset: https://github.com/redis-developer/redis-datasets 
  10. riot https://redis.github.io/riot/#_datagen_struct and fake data gen : https://www.datafaker.net/ 
+
+
+
 
 
 ##  License
