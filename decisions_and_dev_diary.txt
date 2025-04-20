@@ -48,3 +48,16 @@ Next up:
 - Present hardware health with latency and other findings (knowing these causes unfairness).
 2. More Writing:
 -Explain potentail unfairness and metigations in my baseline GraphQL REST- mimicing model
+
+
+April 19
+1. Load test using k6
+- allow users to import text files to specify scheduled load (https://www.youtube.com/watch?v=1mtYVDA2_iQ)
+- Pack k6 as part of the image for all-in-one -> reduce build time 
+
+2. K6 and I/O with potential bias
+Use a 2-phase test pattern (warmup → benchmark)
+What it means:
+Phase 1: Run a short warm-up or data capture phase (with I/O)
+
+Phase 2: Run your actual measurement test (with logging minimized)

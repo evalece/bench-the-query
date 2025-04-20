@@ -2,9 +2,11 @@ This folder excludes npm packages for GraphQL and contains
 
 
 
-`npm start`
+`npm start` 
+schema.js update + GraphQL at http://localhost:4000/ 
 
-GraphQL at http://localhost:4000/
+`npm run`
+writes schema.js ONLY
 
 
 

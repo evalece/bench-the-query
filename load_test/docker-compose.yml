@@ -1,0 +1,35 @@
+# Docker compose for Redis
+# Localhost with blindmount at ./redis_presist 
+# 
+#version: "3.9"
+
+services:
+
+  k6:
+    image: grafana/k6
+    #commend: 
+    ports:
+      - "6381:4000" # local => client Server- graphQL
+
+    volumes: # tip: docker volume prune -f to clear docker cached volumes
+
+      - ./loadtest:/scripts          # ← mount test scripts
+      - ./results:/results           # ← mount results output dir
+ 
+
+      - k6_data:/data  # probably don't need, but might help if crushes (?)
+    networks:
+        - bench_the_query # to be replaced by an API Gateway or VPN-like layer in the future modular tests ###Futrue
+    entrypoint: ["k6", "run", "/scripts/graphql_test.js", "--out", "json=/results/graphql_result.json"]
+
+
+
+
+volumes:
+  k6_data:  # container & non-user setting data
+networks:
+    bench_the_query:
+        external: true # multi- container, but only applies to 1. Same gateway IPI and/ or local deployment 
+
+
+
