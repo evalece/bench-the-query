@@ -30,3 +30,14 @@ https://www.apollographql.com/docs/apollo-server/schema/schema
 ## Test Dataset
   User dataset & schema source: https://github.com/redis-developer/redis-datasets/blob/master/user-database/README.md
   -uses user id as key
+
+
+## Learning Summary 
+
+# Datalaoder in GraphQL with N+1 Problem 
+user feching data considered more optimized in less subquery settings with minimized round trip time. 
+Example: facebook's dataloader https://github.com/graphql/dataloader 
+
+Cache previously query items
+
+

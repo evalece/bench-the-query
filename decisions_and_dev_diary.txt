@@ -57,7 +57,14 @@ April 19
 
 2. K6 and I/O with potential bias
 Use a 2-phase test pattern (warmup → benchmark)
-What it means:
-Phase 1: Run a short warm-up or data capture phase (with I/O)
 
+Phase 1: Run a short warm-up or data capture phase (with I/O)
 Phase 2: Run your actual measurement test (with logging minimized)
+
+
+GraphQL:
+Use their dataloader in benchmark, but also add a Naive one that has nothing while doing nested query.
+-Nested Queries: 
+1. Use independent .js for import
+2. Allow users to import cusomized schema and resolvers 
+This way the project scope is managable 
