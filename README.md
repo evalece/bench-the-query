@@ -1,7 +1,7 @@
 
 # Bench-the-query
 
-##Introduction:
+## Introduction:
 RPC were first considered not an ideal tool for chunk data transmissions but rather efficient in pre-defined data structure data exchanges. [5]. It was observed that in recent years, API protocols such as GraphQL has lifted the limitation of REST API by accessing multiple queries on one API call (while placing GraphQL as a API endpoint for data exchange [7]). This project, though not a research paper nor thesis statement, wishes to dive into the performance metrics on these powerful technologies. 
 
 ##Methology (Query-Focus, testing for week of April 07, 2025):
