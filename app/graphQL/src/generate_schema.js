@@ -12,7 +12,7 @@ console.log(`entering scripting schema in graphQL node`);
 // Load env
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-dotenv.config({ path: '../../../cli_tool/redis_client_var/.env' });
+dotenv.config({ path: '../../../cli_tool/redis_client_var/.env' }); //update this later, allow script to write global var into variouse place
 
 // Parse PAYLOAD
 const payload = process.env.PAYLOAD;
