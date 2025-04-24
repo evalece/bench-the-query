@@ -6,8 +6,8 @@ const typeDefs = require('./schemas.js');
 const resolvers = require('./resolvers.js');
 
 const redis = new Redis({
-  host: process.env.REDIS_HOST || 'localhost',
-  port: process.env.REDIS_PORT || 6370
+  host: 'host.docker.internal',
+  port: 6370 //
 });
 
 const server = new ApolloServer({
