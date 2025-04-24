@@ -18,7 +18,7 @@ sample response:
 }
 
 ## Extra note: 
-
+-code is using v2+
 -Running Apollo Server locally (Apollo Server v2) got debug: 
 npm uninstall apollo-server
 npm install apollo-server@2 graphql
