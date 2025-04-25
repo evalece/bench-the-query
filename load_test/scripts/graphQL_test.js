@@ -1,43 +1,57 @@
 import http from 'k6/http';
-import { check, sleep } from 'k6';
+import { check } from 'k6';  // <- import check!
 
+
+// Contstant quick test default
 export const options = {
-  vus: 1,            //  virtual users //later: controlled by default + docker command 
-  duration: '5s',    // run seconds //later: controlled by default + docker command 
+  vus: 10,          // 10 users hitting at the same time
+  duration: '30s',  // run the test for 30 seconds
 };
 
 
-// depending on if client server is on docker while under common network (ie., same Gateway or host)
-const url = 'http://host.docker.internal:4000/'; // your GraphQL server URL  'http://localhost:4000/' or 'http://host.docker.internal:4000/'
+const stringSizes = [3,5,10,15,30,50,75,100,500,750,1000,1500,2000]; // for later, make this a part of Script
 
-export default function () { //later: controlled by default + docker command 
-  const query = `
-    query {
-      getUserById(id: "1") {
+const fix = (__ENV.FIX || "false") === "true";
+const fixedSize = parseInt(__ENV.FIXED_SIZE || "1500");
+const avg = parseInt(__ENV.AVG || "1500");
+const variance = parseInt(__ENV.VAR || "1000");
 
-            v15,
-            v5
-
-      }
+function pickStringSize() { // given mean, var from list[....] of string size, return distribution samples
+    if (fix) {
+        return fixedSize;
+    } else {
+        const min = Math.max(avg - variance, 0);
+        const max = avg + variance; // will check back the math later
+        const randomSize = Math.floor(Math.random() * (max - min + 1)) + min;
+        let closest = stringSizes.reduce((prev, curr) => 
+            Math.abs(curr - randomSize) < Math.abs(prev - randomSize) ? curr : prev
+        );
+        return closest;
     }
-  `;
-
-  const payload = JSON.stringify({ query });
-
-  const params = {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  };
-
-  const res = http.post(url, payload, params);
-
-  check(res, {
-    //check if successful 
-    'status is 200': (r) => r.status === 200, 
-    
-  });
-
-  // Optional sleep to simulate user think time
-  sleep(1);
 }
+
+export default function () {
+    const url = 'http://myapi:8000/graphql';  // change to container graphQL
+    const headers = { 'Content-Type': 'application/json' };
+
+    const size = pickStringSize();
+    const args = ["user:1", `v${size}`];
+
+    const graphqlQuery = {
+        query: `
+            query {
+                redis(command: "HMGET", args: ${JSON.stringify(args)})
+            }
+        `
+    };
+
+    const res = http.post(url, JSON.stringify(graphqlQuery), { headers: headers });
+
+    // ✅ Check if the response was 200
+    check(res, {
+      'status is 200': (r) => r.status === 200,
+      'body is not empty': (r) => r.body && r.body.length > 0,
+      'response time < 500ms': (r) => r.timings.duration < 500,
+  })
+}
+

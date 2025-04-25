@@ -80,3 +80,17 @@ REST does this by filtering API endpoint query fields to reduce unnessary querie
 
 3.Learning today: Dynamic API endpoint in REST API (i.e./endpoint/query fields 1... n) allows users 
 to query exactly what is wanted. Similiar to GraphQL but with extra pagination + less handler complexity
+
+
+April 22 
+
+1. containerize +pass command via script + or, docker image if bootstraps logic complex
+
+
+April 24
+FastAPI <-> Redis OK (Containerized)
+
+April 25
+
+1. Redis + K6 containerized 
+2. Images of Redis + FastAPI + GraphQL + K6 in one Docker compose 

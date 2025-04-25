@@ -3,11 +3,26 @@
 #### Testing Query of flat json of various length 
 (To update: large payload batch parsing)
 
+Everything inside this folder will be control by script later
 
 ## Simply copy and past lua script to redis_CLI
 
 
 ## Summary
+
+# Lua workflow:
+Multi-Line Lua recommended:
+
+(1) Lua as an add on function 
+Format: 
+EVAL "<lua>" <numkeys> <key1> <key2> ... <keyN> 
+
+(2) Passsing arguments to Lua script via scripts in .sh 
+[args...]
+
+(3) Why such design? Ref: https://redis.io/docs/latest/develop/interact/programmability/eval-intro/ 
+Lua script should not access to modify key contents, key should be passed as arguments, hence, best practice:
+"Script Only Access Keys Passed as Arguments "
 
 Benchmark uses the following customizable string size as payload and is formatted as Redis Hash for Redis Clients.
 `

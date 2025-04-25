@@ -17,19 +17,19 @@ services:
       - ./results:/results           # ← mount results output dir
  
 
-      - k6_data:/data  # probably don't need, but might help if crushes (?)
+      #- k6_data:/data  # probably don't need, but might help if crushes (?)
     networks:
-        - bench_the_query # to be replaced by an API Gateway or VPN-like layer in the future modular tests ###Futrue
+        #- bench_the_query # to be replaced by an API Gateway or VPN-like layer in the future modular tests ###Futrue
     entrypoint: ["k6", "run", "/scripts/graphql_test.js", "--out", "json=/results/graphql_result.json"]
 
 
 
 
-volumes:
-  k6_data:  # container & non-user setting data
-networks:
-    bench_the_query:
-        external: true # multi- container, but only applies to 1. Same gateway IPI and/ or local deployment 
+# volumes:
+#   k6_data:  # container & non-user setting data
+# networks:
+#     bench_the_query:
+#         external: true # multi- container, but only applies to 1. Same gateway IPI and/ or local deployment 
 
 
 
