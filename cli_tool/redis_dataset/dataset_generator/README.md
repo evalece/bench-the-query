@@ -3,6 +3,10 @@
 #### Testing Query of flat json of various length 
 (To update: large payload batch parsing)
 
+
+## Simply copy and past lua script to redis_CLI
+
+
 ## Summary
 
 Benchmark uses the following customizable string size as payload and is formatted as Redis Hash for Redis Clients.
