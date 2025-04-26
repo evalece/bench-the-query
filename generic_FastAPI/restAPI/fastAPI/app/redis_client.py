@@ -6,7 +6,7 @@ import redis
 
 
 # connect to localhost first in image build 
-r = redis.Redis(host='host.docker.internal', port=6370, decode_responses=True) ###** later: control by script
+r = redis.Redis(host='host.docker.internal', port=6370, decode_responses=True) ###** later: control by docker env var + script
 
 def get_user_session(userid: str) -> int:
     return r.exists(f"user:{userid}")

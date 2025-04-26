@@ -7,7 +7,7 @@ const resolvers = require('./resolvers.js');
 
 const redis = new Redis({
   host: 'host.docker.internal',
-  port: 6370 //
+  port: 6370 //for later: to change to docker env var later
 });
 
 const server = new ApolloServer({

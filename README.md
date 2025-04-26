@@ -1,5 +1,54 @@
 
-# Bench-the-query
+### Bench-the-query
+
+## Run 
+
+As of Apirl 25, Redis+ FastAPI + GraphQL Docker-Compose up:
+`docker-compose -p bench_query up`
+
+# 1. RPC-over-GraphQL
+1. at localhost:4000 
+2. Sample Query on Default fake data:
+`query ExampleQuery {
+  redis(command: "HMGET", args: ["user:1", "v3","v5"])
+}`
+
+*** Note: This implemetation has security risks, and is for initial stage  benchmarking purpose.
+
+# 2. FastAPI with Hierarchical Resource Access
+1. at localhost: 8000
+2. Sample Query on Default fake data with: 
+note: this approach discounts POST but gets query directly inside endpoint as a dynamic pattern
+`http://localhost:8000/user/1/v3 v15`
+
+
+## For Later:
+
+# 1. RPC-over-REST
+1. Redis command in FastAPI
+2. Example Redis MHGET: 
+`http://localhost:8000/user/mhget/1/v3 v15`
+
+# 2. Secure Layer on GraphQL
+1. Remove RPC natature of current approach OR,
+2. Implemneted by resolvers + session ID instead.
+
+
+
+## Status
+
+# Key Updates (April 25, 2025)
+1. Completed tested becnh_query compose up
+
+# Next
+1. Test Load Test
+2. Add Docker image commands for port and dataset flexibilities 
+3. Metrics
+
+
+
+### Background Information About The Project
+
 
 ## Introduction:
 RPC were first considered not an ideal tool for chunk data transmissions but rather efficient in pre-defined data structure data exchanges. [5]. It was observed that in recent years, API protocols such as GraphQL has lifted the limitation of REST API by accessing multiple queries on one API call (while placing GraphQL as a API endpoint for data exchange [7]). This project, though not a research paper nor thesis statement, wishes to dive into the performance metrics on these powerful technologies. 
@@ -48,19 +97,6 @@ This is a benchmarking tool that helps investigate protocol and database perform
 - k6 for load testing
 - Docker
 
-### Status
-
-# Key Updates
-1. GraphQL:Comppleted Script injected schema+ resolver
-![schematic](./in-dev-screen/graphQL_query.png)
-2. FastAPI: Completed Hardcoded dynamic API endpoint deployment (i.e. query by optional fields, /user/useid/field 1... n)
-![schematic](./in-dev-screen/dynamic_API_endpoint_Fast_query.png)
-3. Redis test dataset: complete fake data generation via Lua Script + control by script commands (later replaced by docker command)
-![schematic](./in-dev-screen/redis_user.png)
-4. Load test: GraphQL- Completed small load test in K6
-![schematic](./in-dev-screen/graphQL_loadTest.png)
-
-
 
 ## Reference
  1. Dataset: https://www.kaggle.com/datasets/rohanadagouda/cleaned-dataset 
@@ -81,11 +117,12 @@ This is a benchmarking tool that helps investigate protocol and database perform
 ##  License
 
 Author: Eva Liu; lj2liu@uwaterloo.ca
-nitially for job seeking + reviewing & learning DB & distributed sys purpose
+Initially for job seeking + reviewing & learning DB & distributed sys purpose
 ChatGPT assistance in: 
  1. Grammar and proof read of document writing. 
  2. Readability of ReadMe and comments. 
- 3. Paraphrasing 80% first version of readme after techincal discussion. 
+ 3. Paraphrasing 80% first version of readme after techincal discussion, 0% on README across all since 3rd push 
+
 
 
 

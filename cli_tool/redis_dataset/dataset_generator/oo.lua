@@ -1,0 +1,1 @@
+`local count = 0 for i = 1, 10 do local userKey = 'user:' .. i redis.call('SET', userKey, '') count = count + 1 end return count`
