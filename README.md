@@ -4,22 +4,34 @@
 ## Run 
 
 As of Apirl 25, Redis+ FastAPI + GraphQL Docker-Compose up:
-`docker-compose -p bench_query up`
+```bash 
+docker-compose -p bench_query up
+```
 
 ### 1. RPC-over-GraphQL
-1. at localhost:4000 
+1. At 
+```bash
+ localhost:4000
+```
 2. Sample Query on Default fake data:
-`query ExampleQuery {
+```bash
+query ExampleQuery {
   redis(command: "HMGET", args: ["user:1", "v3","v5"])
-}`
+}
+```
 
 *** Note: This implemetation has security risks, and is for initial stage  benchmarking purpose.
 
 ### 2. FastAPI with Hierarchical Resource Access
-1. at localhost: 8000
+1. At 
+```bash
+ localhost: 8000 
+ ```
 2. Sample Query on Default fake data with: 
 note: this approach discounts POST but gets query directly inside endpoint as a dynamic pattern
-`http://localhost:8000/user/1/v3 v15`
+```bash
+ http://localhost:8000/user/1/v3 v15`
+ ```
 
 
 ## For Later:
