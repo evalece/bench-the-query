@@ -1,0 +1,14 @@
+{
+  "dependencies": {
+    "apollo-server": "^3.13.0",
+    "graphql": "^15.10.1",
+    "ioredis": "^5.6.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  },
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  }
+}
