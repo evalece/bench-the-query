@@ -1,12 +1,12 @@
 
-### Bench-the-query
+# Bench-the-query
 
 ## Run 
 
 As of Apirl 25, Redis+ FastAPI + GraphQL Docker-Compose up:
 `docker-compose -p bench_query up`
 
-# 1. RPC-over-GraphQL
+### 1. RPC-over-GraphQL
 1. at localhost:4000 
 2. Sample Query on Default fake data:
 `query ExampleQuery {
@@ -15,7 +15,7 @@ As of Apirl 25, Redis+ FastAPI + GraphQL Docker-Compose up:
 
 *** Note: This implemetation has security risks, and is for initial stage  benchmarking purpose.
 
-# 2. FastAPI with Hierarchical Resource Access
+### 2. FastAPI with Hierarchical Resource Access
 1. at localhost: 8000
 2. Sample Query on Default fake data with: 
 note: this approach discounts POST but gets query directly inside endpoint as a dynamic pattern
@@ -24,12 +24,12 @@ note: this approach discounts POST but gets query directly inside endpoint as a 
 
 ## For Later:
 
-# 1. RPC-over-REST
+### 1. RPC-over-REST
 1. Redis command in FastAPI
 2. Example Redis MHGET: 
 `http://localhost:8000/user/mhget/1/v3 v15`
 
-# 2. Secure Layer on GraphQL
+### 2. Secure Layer on GraphQL
 1. Remove RPC natature of current approach OR,
 2. Implemneted by resolvers + session ID instead.
 
@@ -37,17 +37,17 @@ note: this approach discounts POST but gets query directly inside endpoint as a 
 
 ## Status
 
-# Key Updates (April 25, 2025)
+### Key Updates (April 25, 2025)
 1. Completed tested becnh_query compose up
 
-# Next
+### Next
 1. Test Load Test
 2. Add Docker image commands for port and dataset flexibilities 
 3. Metrics
 
 
 
-### Background Information About The Project
+# Background Information About The Project
 
 
 ## Introduction:
@@ -89,7 +89,7 @@ This is a benchmarking tool that helps investigate protocol and database perform
 
 ## Planed Development: 
 
-### Technologies (no preferred odering, rollout on development basis.)
+## Technologies (no preferred odering, rollout on development basis.)
 
 - FastAPI 
 - Ariadne (GraphQL)
