@@ -1,12 +1,19 @@
 
 # Bench-the-query
 
-## Run 
+## Setup
 
-As of Apirl 25, Redis+ FastAPI + GraphQL Docker-Compose up:
+Redis+ FastAPI + GraphQL Docker-Compose up:
 ```bash 
 docker-compose -p bench_query up
 ```
+
+## Command 
+1. Loading K6 virtual users & load test 
+```bash 
+docker-compose -p bench_query up
+```
+
 
 ### 1. RPC-over-GraphQL
 1. At 
@@ -34,7 +41,7 @@ note: this approach discounts POST but gets query directly inside endpoint as a 
  ```
 
 
-## For Later:
+## For Later
 
 ### 1. RPC-over-REST
 1. Redis command in FastAPI
@@ -60,9 +67,9 @@ note: this approach discounts POST but gets query directly inside endpoint as a 
 
 
 # Background Information About The Project
+![schematic](scheme.jpg)
 
-
-## Introduction:
+## Introduction
 RPC were first considered not an ideal tool for chunk data transmissions but rather efficient in pre-defined data structure data exchanges. [5]. It was observed that in recent years, API protocols such as GraphQL has lifted the limitation of REST API by accessing multiple queries on one API call (while placing GraphQL as a API endpoint for data exchange [7]). This project, though not a research paper nor thesis statement, wishes to dive into the performance metrics on these powerful technologies. 
 
 ##Methology (Query-Focus, testing for week of April 07, 2025):
@@ -93,18 +100,10 @@ This is a benchmarking tool that helps investigate protocol and database perform
  4. Optional tool assiting in converting bulk import of dataset into database in a database-as-change-variable benchmark test. 
 
 
-##  Planned Features (In development now since March 28, 2025)
-![schematic](scheme.jpg)
-- Benchmarking with 2 options
-    1.Protocol as Change Variable
-    2.Databse as Change Variable 
-
-## Planed Development: 
-
-## Technologies (no preferred odering, rollout on development basis.)
+## Technologies
 
 - FastAPI 
-- Ariadne (GraphQL)
+- GraphQL
 - Redis
 - k6 for load testing
 - Docker

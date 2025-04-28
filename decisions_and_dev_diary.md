@@ -94,3 +94,15 @@ April 25
 
 1. Redis + K6 containerized 
 2. Images of Redis + FastAPI + GraphQL + K6 in one Docker compose 
+
+April 26
+
+
+Docker stats - Perfomance & Benchmarking is viewed from Containers
+0. 
+0. For API endpoint, focues on Request rate. rate = RequestsRate ÷ RequestsPerIteration.https://grafana.com/docs/k6/latest/testing-guides/api-load-testing/#request-rate
+0. Load test user paramaters + avoid reinventing wheels: vus; duration; iterations; Request rate
+0. Important: compare lK6 oad test for K6 in test environment as baseline. Ref: https://grafana.com/docs/k6/latest/testing-guides/api-load-testing/
+1. user container/ K6 load test container 
+2. client Sever container; CPU usage, Network I/O, Disk I/O (including server size)
+3. Redis container:  Network I/O to discount propogation delay 
