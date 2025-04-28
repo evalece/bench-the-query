@@ -106,3 +106,8 @@ Docker stats - Perfomance & Benchmarking is viewed from Containers
 1. user container/ K6 load test container 
 2. client Sever container; CPU usage, Network I/O, Disk I/O (including server size)
 3. Redis container:  Network I/O to discount propogation delay 
+
+April 27
+
+in load test, we have GraphQL and FastAPI, but user may want to choose their own load for each client server. 
+Hence, we should create an entry point for users to select their parameters.

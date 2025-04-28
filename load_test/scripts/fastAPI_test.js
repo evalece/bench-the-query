@@ -30,9 +30,9 @@ function pickStringSize() { // given mean, var from list[....] of string size, r
     }
 }
 
-/// Default Dataset GraphQL dataset load test
+/// Default Dataset fast api dataset load test
 export default function () {
-    const url = 'http://graphql:4000/';  // change to container graphQL
+    const url = 'http://fast_api:4000/';  // change to container fast api  user:01/v10 v15`  
     const headers = { 'Content-Type': 'application/json' };
 
     const size = pickStringSize();
