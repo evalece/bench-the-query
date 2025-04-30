@@ -48,7 +48,7 @@ export default function () {
 
     const res = http.post(url, JSON.stringify(graphqlQuery), { headers: headers });
 
-    // ✅ Check if the response was 200
+    // ✅ Check if the response was 200, // for later, check content
     check(res, {
       'status is 200': (r) => r.status === 200,
       'body is not empty': (r) => r.body && r.body.length > 0,

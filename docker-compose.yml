@@ -56,10 +56,10 @@ services:
     networks:
       - bench_q  # Attach to the shared network
     environment:
-      - GRAPHQL_URL=http://graphql:4000/  # Set the environment variable to the GraphQL service URL 
+      - GRAPHQL_URL=http://graphql:8000/  # Set the environment variable to the GraphQL service URL 
     depends_on:
       - graphql  # Ensure the 'graphql' service is ready before running tests
-    command: run  /scripts/graphQL_test.js
+    command: run  /scripts/graphQL_test.js #fastAPI_test.js -> add this later
       
 
 

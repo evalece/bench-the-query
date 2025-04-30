@@ -3,15 +3,31 @@
 
 ## Setup
 
+We will run the following virtual network:
+
+```bash 
+docker network create bench_query
+
+```
+
+
 Redis+ FastAPI + GraphQL Docker-Compose up:
 ```bash 
 docker-compose -p bench_query up
 ```
 
 ## Command 
-1. Loading K6 virtual users & load test 
+1. Loading K6 virtual users & load test (for all) 
 ```bash 
 docker-compose -p bench_query up
+```
+2. Modular Test:
+In each of generic_GraphQL, generic_FastAPI, load_test and redis
+```bash 
+
+docker network create bench_q_debug
+docker compose up
+
 ```
 
 

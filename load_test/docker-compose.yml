@@ -1,23 +1,25 @@
 version: "3.8"
 
 networks:
-  bench_q:
+  bench_q_debug:
     external: true  # This refers to the network from the first Compose file; GPT assisted
 
 services:
   k6:
     image: grafana/k6
-    container_name: k6_load_test
+    #  container_name: k6_load_test
     ports:
       - "1100:1100"
     volumes:
       - ./results:/result
       - ./scripts:/scripts
     networks:
-      - bench_q  # Attach to the shared network
+      - bench_q_debug  # Attach to the shared network
     environment:
-      - GRAPHQL_URL=http://graphql:4000/  # Set the environment variable to the GraphQL service URL 
+      - FastAPI_URL= http://fast_api:8000/ 
+    #  - GRAPHQL_URL=http://graphql:4000/  # Set the environment variable to the GraphQL service URL 
     # depends_on:
     #   - graphql  # Ensure the 'graphql' service is ready before running tests
-    command: run  /scripts/graphQL_test.js
+    #command: run  /scripts/graphQL_test.js
+    command: run  /scripts/fastAPI_test.js
 # Next: docker-compose up
