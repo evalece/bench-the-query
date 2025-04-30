@@ -59,7 +59,8 @@ services:
       - GRAPHQL_URL=http://graphql:8000/  # Set the environment variable to the GraphQL service URL 
     depends_on:
       - graphql  # Ensure the 'graphql' service is ready before running tests
-    command: run  /scripts/graphQL_test.js #fastAPI_test.js -> add this later
+    command:  run --summary-export /results/fast_api_summary.json  /scripts/fastAPI_test.js 
+ #run --summary-export /results/graphQL_test.json  /scripts/graphQL_test.js 
       
 
 

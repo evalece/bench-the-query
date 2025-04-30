@@ -1,14 +1,15 @@
 import http from 'k6/http';
 import { check } from 'k6';  // <- import check!
+import { textSummary } from 'https://jslib.k6.io/k6-summary/0.0.1/index.js'; //<- summary
 
 
 // Contstant quick test default
 export const options = {
-  vus: 10,          // 10 users hitting at the same time
-  duration: '30s',  // run the test for 30 seconds
+  vus: 5,          // 10 users hitting at the same time
+  duration: '5s',  // run the test for 30 seconds
 };
 
-
+//const target = __ENV.TARGET //docker env var
 const stringSizes = [3,5,10,15,30,50,75,100,500,750,1000,1500,2000]; // for later, make this a part of Script
 
 const fix = (__ENV.FIX || "false") === "true";
@@ -49,5 +50,9 @@ export default function () {
       'body is not empty': (r) => r.body && r.body.length > 0,
       'response time < 500ms': (r) => r.timings.duration < 500,
   })
+
+
 }
+
+
 
