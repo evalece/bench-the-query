@@ -18,7 +18,7 @@ docker-compose -p bench_query up
 
 
 3. Load Live Grafana Dashboard: 
-![schematic](dashboard.jpg)
+![schematic](dashboard.png)
 - Step 1: 
 ```bash
  http://localhost:3000
