@@ -7,7 +7,7 @@ networks:
 services:
   k6:
     image: grafana/k6
-    #  container_name: k6_load_test
+
     ports:
       - "1100:1100"
     volumes:
@@ -21,8 +21,5 @@ services:
     #  - GRAPHQL_URL=http://graphql:4000/  # Set the environment variable to the GraphQL service URL 
     # depends_on:
     #   - graphql  # Ensure the 'graphql' service is ready before running tests
-    #command: run  /scripts/graphQL_test.js
-    command:  run --summary-export /results/fast_api_summary.json  /scripts/fastAPI_test.js 
-# Next: docker-compose up
-
-# extra tools: k6-web-dashboard replay --export test-report.html test-result.json -> https://github.com/grafana/xk6-dashboard/blob/master/docs/how-it-works.md 
+   
+    command: run  /scripts/fastAPI_test.js 
