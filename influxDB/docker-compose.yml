@@ -1,0 +1,41 @@
+version: "3.8"
+
+services:
+  influxdb:
+    image: influxdb:1.8
+    #container_name: influxdb
+    ports:
+      - "8086:8086"
+    volumes:
+      - influxdb_data:/var/lib/influxdb # Presistance prupose;  V6 directly output to influx; to delete, check docker volume ls then docker volume rm xxx
+    networks:
+      - bench_q_debug
+    environment:
+      - INFLUXDB_DB=k6db #database name; listenign port: http://influxdb:8086/k6db
+
+
+
+  grafana:
+    image: grafana/grafana
+   #container_name: grafana
+    ports:
+      - "3000:3000" # post-result dashboard: loacalhost:3000
+    networks:
+      - bench_q_debug
+    depends_on:
+      - influxdb # V6 output -> influx DB -> gradana
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin 
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - grafana_data:/var/lib/grafana
+
+
+networks:
+  bench_q_debug:
+    external: true
+
+
+volumes:
+  influxdb_data:
+  grafana_data:
