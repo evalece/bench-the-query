@@ -3,7 +3,7 @@
 
 ## Setup
 
-We will run the following virtual network:
+1. We will run the following virtual network:
 
 ```bash 
 docker network create bench_query
@@ -11,11 +11,36 @@ docker network create bench_query
 ```
 
 
-Redis+ FastAPI + GraphQL Docker-Compose up:
+2. Redis+ FastAPI + GraphQL Docker-Compose up:
 ```bash 
 docker-compose -p bench_query up
 ```
 
+
+3. Load Live Grafana Dashboard: 
+![schematic](dashboard.jpg)
+- Step 1: 
+```bash
+ http://localhost:3000
+
+ User:admin
+ Passward:admin
+ ```
+- Step 2: 
+ 
+In dashboard creation, load dashboard from the following for V6 metrics: 
+```bash
+influxDB/k6_dash.json
+
+ ```
+ Alternatively, see instructions at
+
+```bash
+influxDB/readme.md
+
+ ```
+
+# Under the hood of Benchmark:
 ## Command 
 1. Loading K6 virtual users & load test (for all) 
 ```bash 
@@ -57,6 +82,8 @@ note: this approach discounts POST but gets query directly inside endpoint as a 
  ```
 
 
+
+
 ## For Later
 
 ### 1. RPC-over-REST
@@ -73,12 +100,11 @@ note: this approach discounts POST but gets query directly inside endpoint as a 
 ## Status
 
 ### Key Updates (April 25, 2025)
-1. Completed tested becnh_query compose up
+1. Completed dashboard
 
 ### Next
-1. Test Load Test
-2. Add Docker image commands for port and dataset flexibilities 
-3. Metrics
+1. User parameter passing 
+2. More user friendly side-to-side comparison while minimizing docker service instantiation 
 
 
 
@@ -120,9 +146,10 @@ This is a benchmarking tool that helps investigate protocol and database perform
 
 - FastAPI 
 - GraphQL
-- Redis
+- Redis + Lua script
 - k6 for load testing
 - Docker
+- Grafana 
 
 
 ## Reference

@@ -61,6 +61,7 @@ services:
       - K6_OUT=influxdb=http://influxdb:8086/k6db # influx db
     depends_on:
       - graphql  # Ensure the 'graphql' service is ready before running tests
+  
     command:  run  /scripts/fastAPI_test.js 
  #run --summary-export /results/graphQL_test.json  /scripts/graphQL_test.js 
       
@@ -76,6 +77,8 @@ services:
       - influxdb_data:/var/lib/influxdb # Presistance prupose;  V6 directly output to influx; to delete, check docker volume ls then docker volume rm xxx
     networks:
       - bench_q_debug
+    depends_on:
+      - k6
     environment:
       - INFLUXDB_DB=k6db #database name; listenign port: http://influxdb:8086/k6db
 
