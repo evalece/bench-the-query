@@ -5,8 +5,8 @@ import { textSummary } from 'https://jslib.k6.io/k6-summary/0.0.1/index.js'; //<
 
 // Contstant quick test default
 export const options = {
-  vus: 5,          // 10 users hitting at the same time
-  duration: '5s',  // run the test for 30 seconds
+  vus: 20,          // 10 users hitting at the same time
+  duration: '120s',  // run the test for 30 seconds
 };
 
 //const target = __ENV.TARGET //docker env var
@@ -54,5 +54,8 @@ export default function () {
 
 }
 
-
+export function teardown() {
+    console.log('Test teardown complete.');
+  }
+  
 

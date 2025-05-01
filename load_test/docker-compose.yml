@@ -17,6 +17,7 @@ services:
       - bench_q_debug  # Attach to the shared network
     environment:
       - FastAPI_URL= http://fast_api:8000/ 
+      - K6_OUT=influxdb=http://influxdb:8086/k6db
       
     #  - GRAPHQL_URL=http://graphql:4000/  # Set the environment variable to the GraphQL service URL 
     # depends_on:
