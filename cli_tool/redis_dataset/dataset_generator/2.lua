@@ -1,0 +1,1 @@
+`local count = 0 EVAL "for i, users in ipairs(KEYS) do redis.call('HSET', users: 'v2000', string.rep('#', 2000)) count = count + 1 end return count`

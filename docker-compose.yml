@@ -1,8 +1,13 @@
 version: "3.8"
 
+
+networks: 
+  bench_q:
+    external: true 
 services:
 
   redis:
+    container_name: redis_bench_query
     build: ./redis # Redis Stack image + Lua script for fake dataloading; #load test works with default fake dataset, See readme.
     ports:
       - "6370:6379" # This field is fixed until later dev changes ; container: 6379
@@ -10,6 +15,8 @@ services:
       # Preservered field for scirpt control feature; this helps future development in 
       # multilevel query/ subquery
       # CLI in defualt dataset benchmark 
+    networks:
+      - bench_q 
 
   graphql:
     build: ./generic_graphQL  # Allows user to query with Redis CLI
@@ -20,6 +27,9 @@ services:
     #environment:
       # Preservered field for scirpt control feature; this helps future development in 
       # multilevel query/ subquery
+    networks:
+      - bench_q 
+
 
   fast_api:
     build: ./generic_FastAPI/restAPI/fastAPI  # Allows user to query with Redis CLI
@@ -27,13 +37,39 @@ services:
       - "8000:8000" # container: fastAPI port 8000 pred-defined in code 
     depends_on: #dependent images will get built first
       - redis
+    networks:
+      - bench_q 
     #environment:
       # Preservered field for scirpt control feature; this helps future development in 
       # multilevel query/ subquery
       # CLI in defualt dataset benchmark 
 
+
+  k6:
+    image: grafana/k6
+    container_name: k6_load_test
+    ports:
+      - "1100:1100"
+    volumes:
+      - ./load_test/results:/result
+      - ./load_test/scripts:/scripts
+    networks:
+      - bench_q  # Attach to the shared network
+    environment:
+      - GRAPHQL_URL=http://graphql:8000/  # Set the environment variable to the GraphQL service URL 
+    depends_on:
+      - graphql  # Ensure the 'graphql' service is ready before running tests
+    command:  run --summary-export /results/fast_api_summary.json  /scripts/fastAPI_test.js 
+ #run --summary-export /results/graphQL_test.json  /scripts/graphQL_test.js 
+      
+
+
   
 # Next: 
+# 
+
+### If any sub component fails:
+# docker-compose up -d failed_conta
 
 
 #### aggregated containers: 
