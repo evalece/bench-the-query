@@ -3,7 +3,7 @@ version: "3.8"
 
 networks: 
   bench_q:
-    external: true 
+    external: false 
 services:
 
   redis:
@@ -11,6 +11,8 @@ services:
     build: ./redis # Redis Stack image + Lua script for fake dataloading; #load test works with default fake dataset, See readme.
     ports:
       - "6370:6379" # This field is fixed until later dev changes ; container: 6379
+    # tmpfs:
+    #   - /data
     #environment:
       # Preservered field for scirpt control feature; this helps future development in 
       # multilevel query/ subquery
@@ -20,6 +22,8 @@ services:
 
   graphql:
     build: ./generic_graphQL  # Allows user to query with Redis CLI
+    tmpfs:
+      - /data # client server may cache something, but discard after closing container
     ports:
       - "4000:4000" # container: graphQL port 4000 pred-defined in code 
     depends_on: #dependent images will get built first
@@ -35,6 +39,8 @@ services:
     build: ./generic_FastAPI/restAPI/fastAPI  # Allows user to query with Redis CLI
     ports:
       - "8000:8000" # container: fastAPI port 8000 pred-defined in code 
+    tmpfs:
+      - /data # client server may cache something, but discard after closing container
     depends_on: #dependent images will get built first
       - redis
     networks:
@@ -45,7 +51,7 @@ services:
       # CLI in defualt dataset benchmark 
 
 
-  k6:
+  k6_fastAPI:
     image: grafana/k6
     container_name: k6_load_test
     ports:
@@ -56,15 +62,35 @@ services:
     networks:
       - bench_q  # Attach to the shared network
     environment:
-
-      - GRAPHQL_URL=http://graphql:8000/  # Set the environment variable to the GraphQL service URL 
-      - K6_OUT=influxdb=http://influxdb:8086/k6db # influx db
+      - FastAPI_URL= http://fast_api:8000/ 
+      - K6_OUT=influxdb=http://influxdb:8086/k6db
+      - TYPE=fastapi
     depends_on:
       - graphql  # Ensure the 'graphql' service is ready before running tests
+
+
   
     command:  run  /scripts/fastAPI_test.js 
  #run --summary-export /results/graphQL_test.json  /scripts/graphQL_test.js 
       
+
+  k6_graphql: # one K6 for each API server benchmark; sequentially run
+    image: grafana/k6
+    depends_on:
+      k6_fastapi
+    networks:
+      - bench_q
+    volumes:
+      - ./load_test/scripts:/scripts
+      - ./load_test/results:/results
+    environment:
+      - GraphQL_URL= http://graphql:4000/ 
+      - K6_OUT=influxdb=http://influxdb:8086/k6db
+      - TYPE=graphql
+    
+    command: >
+      sh -c "while [ ! -f /results/fastapi_done.flag ]; do echo 'Waiting for fastapi test...'; sleep 2; done &&
+              k6 run --summary-export=/results/graphql.json /scripts/graphQL_test.js"
 
 
 
@@ -76,7 +102,7 @@ services:
     volumes:
       - influxdb_data:/var/lib/influxdb # Presistance prupose;  V6 directly output to influx; to delete, check docker volume ls then docker volume rm xxx
     networks:
-      - bench_q_debug
+      - bench_q
     depends_on:
       - k6
     environment:
@@ -90,7 +116,7 @@ services:
     ports:
       - "3000:3000" # post-result dashboard: loacalhost:3000
     networks:
-      - bench_q_debug
+      - bench_q
     depends_on:
       - influxdb # V6 output -> influx DB -> gradana
     environment:
@@ -103,7 +129,7 @@ services:
 
 
 
-volumes: # For presistance
+volumes: # For presistance in dashboard and logging
   influxdb_data:
   grafana_data:
   
@@ -111,7 +137,10 @@ volumes: # For presistance
 # 
 
 ### If any sub component fails:
-# docker-compose up -d failed_conta
+# docker-compose up -d failed_instance
+
+#### Gracefulluy shutdown:
+# docker-compose down
 
 
 #### aggregated containers: 

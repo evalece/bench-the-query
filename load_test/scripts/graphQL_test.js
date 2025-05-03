@@ -4,8 +4,8 @@ import { check } from 'k6';  // <- import check!
 
 // Contstant quick test default
 export const options = {
-  vus: 10,          // 10 users hitting at the same time
-  duration: '30s',  // run the test for 30 seconds
+  vus: 5,          // 10 users hitting at the same time
+  duration: '20s',  // run the test for 30 seconds
 };
 
 
