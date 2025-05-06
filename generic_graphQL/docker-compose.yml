@@ -1,0 +1,22 @@
+  
+  
+version: "3.8"
+
+
+networks: 
+  bench_q_debug:
+    external: true 
+services:
+  graphql:
+    build: .  # Allows user to query with Redis CLI
+    tmpfs:
+      - /data # client server may cache something, but discard after closing container
+    ports:
+      - "4000:4000" # container: graphQL port 4000 pred-defined in code 
+    depends_on: #dependent images will get built first
+      - redis
+    #environment:
+      # Preservered field for scirpt control feature; this helps future development in 
+      # multilevel query/ subquery
+    networks:
+      - bench_q_debug 

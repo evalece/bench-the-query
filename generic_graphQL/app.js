@@ -1,4 +1,6 @@
-const { ApolloServer } = require('apollo-server');
+// const { ApolloServer } = require('apollo-server');
+// import { ApolloServer } from '@apollo/server';
+import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
 
 
 const Redis = require('ioredis');
@@ -13,6 +15,10 @@ const redis = new Redis({
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  introspection: true,
+  plugins: [
+    ApolloServerPluginLandingPageLocalDefault({ embed: true }) // to disable from remote sandbox 
+  ],
   context: () => ({ redis })
 });
 

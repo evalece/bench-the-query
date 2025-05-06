@@ -111,3 +111,29 @@ April 27
 
 in load test, we have GraphQL and FastAPI, but user may want to choose their own load for each client server. 
 Hence, we should create an entry point for users to select their parameters.
+
+May 05
+
+GraphQL and FastAPI load test needs to be run sequentially, and probability in different container for fewer noise. 
+
+A few management tools in my mind summarized:
+K8s: tools to group, deploy, schedule, and instepct status of containers with consideration of load balance (CI). But not CD nor versioning.
+Helm: (Not useful in our case) More like a package manager to keep track of all image versions  
+
+About Redis response time on query: I thought about Redis MONITOR but I/O heavy may skew latency and become potentially misleading. 
+A solution for now: make large load test iteration to allow convergence of distribution.
+
+learning: 
+YAML anchor- alternative solution to .env for env var used by multiple containers in one .yml; limitation (vs .env): need to be in one YAML
+x-shared-env: &shared-env
+  STRING_SIZES: ${STRING_SIZES:-3,5,10,15,30,50,75,100,500,750,1000,1500,2000} 
+  ...
+  services:
+  k6_test:
+    image: grafana/k6
+    environment: *shared-env
+
+  graphql_server:
+    image: node:18
+    environment: *shared-env
+

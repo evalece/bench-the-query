@@ -1,4 +1,4 @@
-
+[3,5,10,15,30,50,75,100,500,750,1000,1500,2000];
 
 #### Testing Query of flat json of various length 
 (To update: large payload batch parsing)
