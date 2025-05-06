@@ -1,25 +1,26 @@
 version: "3.8"
 
-
+#####   Container networks #######
 networks: 
   bench_q:
     external: false 
 services:
 
+
+#############   Database  ######################
   redis:
     container_name: redis_bench_query
     build: ./redis # Redis Stack image + Lua script for fake dataloading; #load test works with default fake dataset, See readme.
     ports:
       - "6370:6379" # This field is fixed until later dev changes ; container: 6379
-    # tmpfs:
-    #   - /data
-    #environment:
-      # Preservered field for scirpt control feature; this helps future development in 
-      # multilevel query/ subquery
-      # CLI in defualt dataset benchmark 
+    env_file: # debug, user default command for payload + user number 
+      - ./.env
+    
     networks:
       - bench_q 
 
+
+#############   Client Server   ######################
   graphql:
     build: ./generic_graphQL  # Allows user to query with Redis CLI
     tmpfs:
@@ -51,7 +52,9 @@ services:
       # CLI in defualt dataset benchmark 
 
 
-  k6_fastAPI: # for next update, do them sequentially instead of roughly parallelly at concurrent request
+#############   Load Test     ######################
+
+  k6_fastAPI_load_test: # for next update, do them sequentially instead of roughly parallelly at concurrent request
     image: grafana/k6
     container_name: fastAPI_load_test
     ports:
@@ -65,6 +68,10 @@ services:
       - FastAPI_URL= http://fast_api:8000/ 
       - K6_OUT=influxdb=http://influxdb:8086/k6db
       - TYPE=fastapi
+
+    env_file: # debug, user default command for payload;
+      - ./.env
+    
     # depends_on:
     #   - graphql  # Ensure the 'graphql' service is ready before running test
   
@@ -72,11 +79,11 @@ services:
  #run --summary-export /results/graphQL_test.json  /scripts/graphQL_test.js 
       
 
-  k6_graphql: # one K6 for each API server benchmark; sequentially run
+  k6_graphql_load_test: # one K6 for each API server benchmark; sequentially run
     image: grafana/k6
     container_name: graphQL_load_test
     depends_on:
-      k6_fastapi
+      - k6_fastAPI_load_test
     networks:
       - bench_q
     volumes:
@@ -86,11 +93,13 @@ services:
       - GraphQL_URL= http://graphql:4000/ 
       - K6_OUT=influxdb=http://influxdb:8086/k6db
       - TYPE=graphql
+    env_file: # debug, user default command for payload;
+      - ./.env
     
     command: run /scripts/graphQL_test.js 
 
 
-
+############### Visualization of Benchmark from Load Test       ##########################
 
   influxdb:
     image: influxdb:1.8

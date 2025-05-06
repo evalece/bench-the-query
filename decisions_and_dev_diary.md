@@ -124,7 +124,7 @@ About Redis response time on query: I thought about Redis MONITOR but I/O heavy 
 A solution for now: make large load test iteration to allow convergence of distribution.
 
 learning: 
-YAML anchor- alternative solution to .env for env var used by multiple containers in one .yml; limitation (vs .env): need to be in one YAML
+1. YAML anchor- alternative solution to .env for env var used by multiple containers in one .yml; limitation (vs .env): need to be in one YAML
 x-shared-env: &shared-env
   STRING_SIZES: ${STRING_SIZES:-3,5,10,15,30,50,75,100,500,750,1000,1500,2000} 
   ...
@@ -137,3 +137,5 @@ x-shared-env: &shared-env
     image: node:18
     environment: *shared-env
 
+2. Review of Lua Script, take the advantage of arg1...n
+redis-cli EVAL <script> <numkeys> <key1> <key2> ... , <arg1> <arg2> ...

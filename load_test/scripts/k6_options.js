@@ -5,15 +5,19 @@
 
 import { parseEnvSizes} from './parsed_env.js'; // query return payload size, set by docker command env
 const stringSizes = parseEnvSizes();
+const testType = __ENV.TYPE || 'unknown'; // based on client server
 
-export const options = { // baseline: use default database data retrival size to name exec function 
+export const options = {
+    tags: {
+        type: testType //client server, for filtering visualiztion data 
+      }, // baseline: use default database data retrival size to name exec function 
     scenarios: Object.fromEntries(
     stringSizes.map(size => [
         `query_size_${size}`,
         {
         executor: 'shared-iterations',
-        vus: 10,
-        iterations: 20, // iteration must > vus
+        vus: 20,
+        iterations: 100, // iteration must > vus
         exec: 'runner',
         env: { TEST_SIZE: String(size) }, //as argument in load test
         }

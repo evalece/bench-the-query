@@ -1,4 +1,12 @@
+
+#### Default dataset in Redis
+Redis uses the following array of string size to represent fake data for each key. Hence, each key has a total value to the sum of the array.
 [3,5,10,15,30,50,75,100,500,750,1000,1500,2000];
+
+### Redis Wrapper
+
+
+
 
 #### Testing Query of flat json of various length 
 (To update: large payload batch parsing)

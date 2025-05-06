@@ -1,28 +1,57 @@
 version: "3.8"
 
+
+
+### the following is fastAPI 
+# services:
+#   k6_fastAPI_debug: # for next update, do them sequentially instead of roughly parallelly at concurrent request
+#     image: grafana/k6
+#     container_name: fastAPI_load_test
+#     ports:
+#       - "1100:1100"
+#     networks:
+#       - bench_q_debug  # Attach to the shared network
+#     volumes:
+#       - ./results:/result
+#       - ./scripts:/scripts
+#     environment:
+#       - FastAPI_URL= http://fast_api:8000/ 
+#      # - K6_OUT=influxdb=http://influxdb:8086/k6db
+#       - TYPE=fastapi
+#     env_file: # debug, user default command for payload;
+#       - ../.env
+    
+
+#     # depends_on:
+#     #   - graphql  # Ensure the 'graphql' service is ready before running test
+  
+#     command:  run  /scripts/fastAPI_test.js 
+
+# networks:
+#   bench_q_debug:
+#     external: true  # This refers to the network from the first Compose file; GPT assisted
+
+
+
+# the following is GraphQL
+
 services:
-  k6_fastAPI: # for next update, do them sequentially instead of roughly parallelly at concurrent request
+  k6_graphql_debug:
     image: grafana/k6
-    container_name: fastAPI_load_test
     ports:
       - "1100:1100"
+    volumes:
+      - ./results:/results
+      - ./scripts:/scripts
     networks:
       - bench_q_debug  # Attach to the shared network
-    volumes:
-      - ./results:/result
-      - ./scripts:/scripts
     environment:
-      - FastAPI_URL= http://fast_api:8000/ 
-     # - K6_OUT=influxdb=http://influxdb:8086/k6db
-      - TYPE=fastapi
+      - GraphQL_URL= http://graphql:4000/ 
+      - TYPE=graphql
     env_file: # debug, user default command for payload;
       - ../.env
     
-
-    # depends_on:
-    #   - graphql  # Ensure the 'graphql' service is ready before running test
-  
-    command:  run  /scripts/fastAPI_test.js 
+    command: run  /scripts/graphQL_test.js         
 
 networks:
   bench_q_debug:
@@ -30,26 +59,3 @@ networks:
 
 
 
-# the following is GraphQL
-
-# services:
-#   k6:
-#     image: grafana/k6
-
-#     ports:
-#       - "1100:1100"
-#     volumes:
-#       - ./results:/results
-#       - ./scripts:/scripts
-#     networks:
-#       - bench_q_debug  # Attach to the shared network
-#     environment:
-#       - GraphQL_URL= http://graphql:4000/ 
-#     #  - K6_OUT=influxdb=http://influxdb:8086/k6db
-#       - TYPE=graphql
-      
-#     #  - GRAPHQL_URL=http://graphql:4000/  # Set the environment variable to the GraphQL service URL 
-#     # depends_on:
-#     #   - graphql  # Ensure the 'graphql' service is ready before running tests
-   
-#     command: run  /scripts/graphQL_test.js 
