@@ -17,24 +17,17 @@ https://dev.to/ken_mwaura1/getting-started-monitoring-a-fastapi-app-with-grafana
 API request <-> API server (port yyy) <--- (potential propogation delay) ---> (port xxx) Redis DB
 
 We track:
-
 1. query_id
-
 2. client_sent_time
-
 3. server_received_time
-
 4. server_duration
-
 5. redis_duration
-
 6. client_received_time
-
 7. round_trip_time (Propogation delay)
 
 
 
-## April 16 2025
+## April 16 
 Originally planned to complete this project by  April 14ish, but decided to allocate more time to 
 deliver a smarter script that generates and implements 
 1. client code in GraphQL and REST API accross all benchmark 
@@ -44,30 +37,31 @@ deliver a smarter script that generates and implements
 
 Next up:
 1. Reading: 
-- Concurrency & CPU related topics reading- currently all using asynch non-blocking but need to look into concurrent reques and spike.
-- Present hardware health with latency and other findings (knowing these causes unfairness).
+  - Concurrency & CPU related topics reading- currently all using asynch non-blocking but need to look into concurrent reques and spike.
+  - Present hardware health with latency and other findings (knowing these causes unfairness).
 2. More Writing:
--Explain potentail unfairness and metigations in my baseline GraphQL REST- mimicing model
+  - Explain potentail unfairness and metigations in my baseline GraphQL REST- mimicing model
 
 
 ## April 19
 1. Load test using k6
-- allow users to import text files to specify scheduled load (https://www.youtube.com/watch?v=1mtYVDA2_iQ)
-- Pack k6 as part of the image for all-in-one -> reduce build time 
+  - allow users to import text files to specify scheduled load (https://www.youtube.com/watch?v=1mtYVDA2_iQ)
+  - Pack k6 as part of the image for all-in-one -> reduce build time 
 
 2. K6 and I/O with potential bias
-Use a 2-phase test pattern (warmup → benchmark)
+  - Use a 2-phase test pattern (warmup → benchmark)
 
-Phase 1: Run a short warm-up or data capture phase (with I/O)
-Phase 2: Run your actual measurement test (with logging minimized)
+  - Phase 1: Run a short warm-up or data capture phase (with I/O)
+  - Phase 2: Run your actual measurement test (with logging minimized)
 
 
 GraphQL:
 Use their dataloader in benchmark, but also add a Naive one that has nothing while doing nested query.
--Nested Queries: 
-1. Use independent .js for import
-2. Allow users to import cusomized schema and resolvers 
-This way the project scope is managable 
+This way the project scope is managable.
+- Nested Queries: 
+  1. Use independent .js for import
+  2. Allow users to import cusomized schema and resolvers 
+
 
 
 ## April 20 
@@ -99,13 +93,16 @@ FastAPI <-> Redis OK (Containerized)
 
 
 Docker stats - Perfomance & Benchmarking is viewed from Containers
-0. 
+
 0. For API endpoint, focues on Request rate. rate = RequestsRate ÷ RequestsPerIteration.https://grafana.com/docs/k6/latest/testing-guides/api-load-testing/#request-rate
 0. Load test user paramaters + avoid reinventing wheels: vus; duration; iterations; Request rate
-0. Important: compare lK6 oad test for K6 in test environment as baseline. Ref: https://grafana.com/docs/k6/latest/testing-guides/api-load-testing/
+0. Important: compare lK6 oad test for K6 in test environment as baseline [1]. 
 1. user container/ K6 load test container 
 2. client Sever container; CPU usage, Network I/O, Disk I/O (including server size)
 3. Redis container:  Network I/O to discount propogation delay 
+
+### Reference
+  [1] Api-load-testing. K6. URL:  https://grafana.com/docs/k6/latest/testing-guides/api-load-testing/
 
 ## April 27
 
@@ -138,16 +135,19 @@ x-shared-env: &shared-env
     environment: *shared-env
 
 2. Review of Lua Script, take the advantage of arg1...n
+```bash 
 redis-cli EVAL <script> <numkeys> <key1> <key2> ... , <arg1> <arg2> ...
+```
 
 3. K6 Load test script code: 
 - Reduce repeated part to be imported by all load test; hence, one file will change all load tests.
 
 4. Project wide env var, the following will be passed as env var and automated.
+```bash 
 - # .env, otherwise set by user during docker compose up 
 STRING_SIZES=3,5,10,15,30,50,75,100,500,750,1000,1500,2000
 NUM_USER=10
-
+```
 
 ## May 07 
 
@@ -171,9 +171,9 @@ To make use of the pre-config feature, which is already made to present laod tes
     5. http_req_waiting	Trend	Time spent waiting for response from remote host (a.k.a. “time to first byte”, or “TTFB”). float
 
 
-Reference
-[1]Tags and Groups Grafana URL: https://grafana.com/docs/k6/latest/using-k6/tags-and-groups/ 
-[2]Metrics. K6 URL: https://grafana.com/docs/k6/latest/using-k6/metrics/reference/
+###  Reference
+  [1]Tags and Groups Grafana URL: https://grafana.com/docs/k6/latest/using-k6/tags-and-groups/ 
+  [2]Metrics. K6 URL: https://grafana.com/docs/k6/latest/using-k6/metrics/reference/
 
 
 
