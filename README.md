@@ -1,7 +1,7 @@
 
 # Bench-the-query
 
-![schematic](/in-dev-screen/final_result.png)
+![schematic](in-dev-screen/final_result.png)
 
 ## What is Bench the Query?
 - Bench the Query helps developers to choose client servers based on traffic load and context size.
@@ -37,7 +37,7 @@ NUM_USER=10
 
 Customize your K6 load test if you need at:
 
-[View the script](./load_test/scripts/k6_options.js)
+[View the script](load_test/scripts/k6_options.js)
 
 (For best use of pre-config dashboard, do not delete tags or rename them). 
 
