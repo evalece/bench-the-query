@@ -1,7 +1,7 @@
 
 # Bench-the-query
 
-![schematic](in-dev-screen/final_result.png)
+![schematic](/in-dev-screen/final_result.png)
 
 ## What is Bench the Query?
 - Bench the Query helps developers to choose client servers based on traffic load and context size.
