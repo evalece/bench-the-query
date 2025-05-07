@@ -8,7 +8,11 @@ export { options };  // scenario for K6
     export function runner() {
     const size = parseInt(__ENV.TEST_SIZE); // points to option tag 
         const url = `http://fast_api:8000/user/1/v${size}`;
-        const res = http.get(url);
+        const res = http.get(url, {
+            tags: {
+              requested_len: size
+            },
+    });
         console.log(`Queried size=${size}, status=${res.status}`);
         
             // only Check if the response was 200 for now

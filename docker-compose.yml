@@ -58,7 +58,7 @@ services:
     image: grafana/k6
     container_name: fastAPI_load_test
     ports:
-      - "1100:1100"
+      - "1100:1100" # Don't really need ports since not listening 
     volumes:
       - ./load_test/results:/result
       - ./load_test/scripts:/scripts

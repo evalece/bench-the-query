@@ -16,6 +16,7 @@ export function runner() {
     const url = 'http://graphql:4000/';  // change to container graphQL
     const args = ["user:1", `v${size}`]; // pre-defined argument-query method in resolver 
 
+
     const graphqlQuery = {  // redis(command: "HMGET", args: ${JSON.stringify(args)}) 
         query: `
             query {
@@ -25,7 +26,11 @@ export function runner() {
       
     };
 
-    const res = http.post(url, JSON.stringify(graphqlQuery), { headers });
+    const res = http.post(url, JSON.stringify(graphqlQuery), { headers, 
+      tags: {
+        requested_len: size.toString()
+      }
+    });
     console.log(`Queried size=${size}, status=${res.status}`);
 
     // ✅ Check if the response was 200, // for later, check content

@@ -1,5 +1,17 @@
 
 
+# Technical Blog
+- This is a log that records my learning and engineering decisions while developing this benchmark project. 
+- Key dates: 
+
+1. April 16 : Lua Script has proven to be the fastest way to import fake data into redis, faster than pipe and Riot. This shows the importance of latency introduced by I/O (with linux, there will be at least one context switch [1]). 
+2. April 19 : Client server to embed Redis commend fo quick benchmark (for now).
+3. April 20: REST API on resouces-based access: remove POST and pagination by implemnting query via URL. i.e, URL: .../key/search_criteria=c1,c2,c3 
+4. April 26 : Modulaize codes into docker containers as services, take advantages of tools that are self-containerized. 
+
+### Reference 
+  [1] https://stackoverflow.com/questions/55331133/do-linux-pipe-read-writes-always-cause-a-context-switch 
+
 ## April 13 2025
 Metrics:
 Response time
@@ -90,13 +102,11 @@ FastAPI <-> Redis OK (Containerized)
 2. Images of Redis + FastAPI + GraphQL + K6 in one Docker compose 
 
 ## April 26
-
-
 Docker stats - Perfomance & Benchmarking is viewed from Containers
 
 0. For API endpoint, focues on Request rate. rate = RequestsRate ÷ RequestsPerIteration.https://grafana.com/docs/k6/latest/testing-guides/api-load-testing/#request-rate
 0. Load test user paramaters + avoid reinventing wheels: vus; duration; iterations; Request rate
-0. Important: compare lK6 oad test for K6 in test environment as baseline [1]. 
+0. Important: compare K6 oad test for K6 in test environment as baseline [1]. 
 1. user container/ K6 load test container 
 2. client Sever container; CPU usage, Network I/O, Disk I/O (including server size)
 3. Redis container:  Network I/O to discount propogation delay 
@@ -160,7 +170,8 @@ Grafana Dashboard - How to compare client servers efficiently
 To make use of the pre-config feature, which is already made to present laod test stats with great detail, I looked into adding extra query tags for both client servers to assist query grouping. 
 
 2. Ideally the workflow for configuring dashboard is as follows:
-    1. load K6 pre-config dashboard : Import dashboard via Grafana.com, search for 2587 for V6 specific metrics dashboard 
+    1. load K6 pre-config dashboard  Import dashboard via Grafana.com, search for 2587 for V6 specific metrics dashboard 
+    1. http_req_blocked Time spent blocked (waiting for a free TCP connection slot) before initiating the request.
     2. filter to select source from tag [1]. (Docker level if tagging client server; making it an env var)
     3. (Optional) Similar to 2, use more tags to group and identify  request details (in load test code )
 3. Lastly, help users understand metrics and their meanings, I will use [2]. Key metrics in our case:

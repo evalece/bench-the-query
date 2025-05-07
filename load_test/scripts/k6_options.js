@@ -9,8 +9,8 @@ const testType = __ENV.TYPE || 'unknown'; // based on client server
 
 export const options = {
     tags: { // For dashboard + influxDB querying; https://grafana.com/docs/k6/latest/using-k6/tags-and-groups/
-        type: testType //client server, for filtering visualiztion data 
-        requested_length: stringSizes
+        type: testType, //client server, for filtering visualiztion data 
+        // requested_length: to be used in response
 
       }, // baseline: use default database data retrival size to name exec function 
     scenarios: Object.fromEntries(
