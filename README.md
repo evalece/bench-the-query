@@ -1,5 +1,11 @@
 
 # Bench-the-query
+![Version](https://img.shields.io/badge/version-v1.0.0-blue)
+![License](https://img.shields.io/github/license/evalece/bench-the-query)
+![Last Commit](https://img.shields.io/github/last-commit/evalece/bench-the-query)
+![Dockerized](https://img.shields.io/badge/Dockerized-yes-blue?logo=docker)
+![Tech Stack](https://img.shields.io/badge/Made%20With-K6%20%7C%20Redis%20%7C%20FastAPI%20%7C%20GraphQL%20%7C%20Grafana-informational)
+
 
 ![schematic](in-dev-screen/final_result.png)
 
