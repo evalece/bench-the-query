@@ -15,5 +15,10 @@ services:
       # Preservered field for scirpt control feature; this helps future development in 
       # multilevel query/ subquery
       # CLI in defualt dataset benchmark 
+
+    env_file: # debug, user default command for payload;
+      - ../.env
     networks:
       - bench_q_debug
+
+  # docker exec -it redis_bench_query_debug redis-cli

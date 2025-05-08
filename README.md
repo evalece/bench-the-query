@@ -1,156 +1,90 @@
 
 # Bench-the-query
 
-## Setup
+![schematic](in-dev-screen/final_result.png)
 
-1. We will run the following virtual network:
+## What is Bench the Query?
+- Bench the Query helps developers to choose client servers based on traffic load and context size.
+- The containerized Benchmark tool are light-weighted and can be tested seperately.
+- A versatile tool to benchmark various client servers with minimal code. 
+- Automates deployment for database, query protocols and load test in one docker compile. 
+- Furthermore, benchmark results are made accessible in a pre-configured Grafana Dashboard. 
+- Users use this tool by entering a list of payload size used in querying and setting desire loads in load test the same way as K6 load test. 
 
+## Bench the Query under the hood:
+
+A containerized benchmarking suite to compare GraphQL and REST API (FastAPI for now, more later) performance under simulated load using K6 while enabling realtime tracking in Grafana.
+  If -> desinates dataflow, we have: 
+  Lua script -> Redis <-> GraphQL & FastAPI <-> K6 -> InfluxDB-> Grafana. 
+
+## What Bench the Query is not?
+- While more client servers are to be added more a more inclusive benchmark test, the client protocols and security checks are not made to be serve production codes. 
+
+
+# Running Bench the Query 
+Git clone the project
+## Step 1
 ```bash 
-docker network create bench_query
+git clone https://github.com/evalece/bench-the-query.git 
+```
+
+If needed, adjust .env for desired payload lenghth. These are contents in string sizes and will be requested by K6 load test user via GET method. You can also set a desired number of users holding these values in Redis. If not, we will use defualt: 
+
+[View the script](./env)
+
+```bash
+# .env, otherwise set by user during docker compose up 
+STRING_SIZES=3,5,10,15,30,50,75,100,500,750,1000,1500,2000
+NUM_USER=10
 
 ```
 
+## Step 2
 
-2. Redis+ FastAPI + GraphQL Docker-Compose up:
+Customize your K6 load test if you need at:
+
+[View the script](load_test/scripts/k6_options.js)
+
+(For best use of pre-config dashboard, do not delete tags or rename them). 
+
+
+## Step 3 (Last step)
+
+Docker-Compose EVERYTHING up 
 ```bash 
-docker-compose -p bench_query up
+
+docker-compose up
+
+```
+And accessing results later by loading pre-config dashboard at 
+
+```bash
+ load_test/dashboard/bechmark_dashboard.json
+```
+Result at:
+```bash
+http://localhost:3000
 ```
 
+## (Optional Step) Accessing Results
+For accessing the results the first time in Grafana, use the following credential:
 
-3. Load Live Grafana Dashboard: 
+Load Live Grafana Dashboard (if using dashboard 2587 with K6 default metrics) 
 ![schematic](dashboard.png)
-- Step 1: 
+
 ```bash
  http://localhost:3000
 
  User:admin
  Passward:admin
  ```
-- Step 2: 
- 
-In dashboard creation, load dashboard from the following for V6 metrics: 
-```bash
-influxDB/k6_dash.json
 
- ```
- Alternatively, see instructions at
+Alternatively, see instructions at the following if you would like to setup your own
+[View extra note](influxDB/readme.md)
 
-```bash
-influxDB/readme.md
+## More?
 
- ```
-
-# Under the hood of Benchmark:
-## Command 
-1. Loading K6 virtual users & load test (for all) 
-```bash 
-docker-compose -p bench_query up
-```
-2. Modular Test:
-In each of generic_GraphQL, generic_FastAPI, load_test and redis
-```bash 
-
-docker network create bench_q_debug
-docker compose up
-
-```
-
-
-### 1. RPC-over-GraphQL
-1. At 
-```bash
- localhost:4000
-```
-2. Sample Query on Default fake data:
-```bash
-query ExampleQuery {
-  redis(command: "HMGET", args: ["user:1", "v3","v5"])
-}
-```
-
-*** Note: This implemetation has security risks, and is for initial stage  benchmarking purpose.
-
-### 2. FastAPI with Hierarchical Resource Access
-1. At 
-```bash
- localhost: 8000 
- ```
-2. Sample Query on Default fake data with: 
-note: this approach discounts POST but gets query directly inside endpoint as a dynamic pattern
-```bash
- http://localhost:8000/user/1/v3 v15`
- ```
-
-
-
-
-## For Later
-
-### 1. RPC-over-REST
-1. Redis command in FastAPI
-2. Example Redis MHGET: 
-`http://localhost:8000/user/mhget/1/v3 v15`
-
-### 2. Secure Layer on GraphQL
-1. Remove RPC natature of current approach OR,
-2. Implemneted by resolvers + session ID instead.
-
-
-
-## Status
-
-### Key Updates (April 25, 2025)
-1. Completed dashboard
-
-### Next
-1. User parameter passing 
-2. More user friendly side-to-side comparison while minimizing docker service instantiation 
-
-
-
-# Background Information About The Project
-![schematic](scheme.jpg)
-
-## Introduction
-RPC were first considered not an ideal tool for chunk data transmissions but rather efficient in pre-defined data structure data exchanges. [5]. It was observed that in recent years, API protocols such as GraphQL has lifted the limitation of REST API by accessing multiple queries on one API call (while placing GraphQL as a API endpoint for data exchange [7]). This project, though not a research paper nor thesis statement, wishes to dive into the performance metrics on these powerful technologies. 
-
-##Methology (Query-Focus, testing for week of April 07, 2025):
-(To be pretty format later, no time now)
- 1. Cold start-Set no cache on Database to simulate cold start
- 2. Cold start-Query with random draw ID on NoSQL
- 3. Storage-TTL:set forever for now, allow DB with least complexity.
-
- Performance + Stress Test + Edge Case Analysis :
- 1. Chunk data query- latency, fault tolerance. 
- 2. Efficient data - increase overhead: content ratio by all means, test latency, fault tolerance
-
- Bottleneck Test :
- 1.  GraphQL API endpoint vs Distributed REST (thought: data coming back: if at the same time, bottleneck might be on client)
-
-
-##Test environment:
-Java (Redis i/o + Predefined GraphQL query & return data type) <=> GraphQL server (API end point) => Redis [7]
-
-
-Java + Spring  <=> Redis [8]
-
-This is a benchmarking tool that helps investigate protocol and database performaances trade offs in a noiseless environment as it offers: 
-
- 1. Setting of Control and Change Variable
- 2. Allow transparent network settings and/ or complications (which would lead to potential bias).
- 3. Query-type Focus Benchmarking 
- 4. Optional tool assiting in converting bulk import of dataset into database in a database-as-change-variable benchmark test. 
-
-
-## Technologies
-
-- FastAPI 
-- GraphQL
-- Redis + Lua script
-- k6 for load testing
-- Docker
-- Grafana 
-
+see   [View the log](technical_blogs/README.md)  for more development story!
 
 ## Reference
  1. Dataset: https://www.kaggle.com/datasets/rohanadagouda/cleaned-dataset 
