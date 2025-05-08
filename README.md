@@ -74,11 +74,7 @@ Load Live Grafana Dashboard (if using dashboard 2587 with K6 default metrics)
  ```
 
 Alternatively, see instructions at the following if you would like to setup your own
-
-```bash
-influxDB/readme.md
-
- ```
+[View extra note](influxDB/readme.md)
 
 ## More?
 
