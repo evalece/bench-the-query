@@ -63,7 +63,7 @@ http://localhost:3000
 ## (Optional) Accessing Results
 For accessing the results the first time in Grafana, use the following credential:
 
-Load Live Grafana Dashboard: 
+Load Live Grafana Dashboard (if using dashboard 2587 with K6 default metrics) 
 ![schematic](dashboard.png)
 - Step 1: 
 ```bash
