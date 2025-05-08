@@ -82,7 +82,7 @@ influxDB/readme.md
 
 ## More?
 
-see technical_blogs/README.md for more development story!
+see   [View the log](technical_blogs/README.md)  for more development story!
 
 ## Reference
  1. Dataset: https://www.kaggle.com/datasets/rohanadagouda/cleaned-dataset 
