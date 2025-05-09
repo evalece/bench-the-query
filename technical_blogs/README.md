@@ -2,7 +2,10 @@
 
 # Technical Blog
 
-## This is a log that records my learning and engineering decisions while developing this benchmark project. 
+## This technical log accompanies the bench-the-query project, which benchmarks the performance of REST vs GraphQL APIs under load. The goal is to explore trade-offs in and potential performance drops while analyzing them in a de-noise environment where propogation delays are minimized. Test pipeline: K6, Redis, and Grafana, InfluxDB Dockers. Test Target: FastAPI, GraphQL
+
+## (Future Improvement: I will soon work on making my "deep dives" into Git Pages)
+
 - Key dates: 
   1. April 16 : Lua Script has proven to be the fastest way to import fake data into redis, faster than pipe and Riot. This shows the importance of latency introduced by I/O (with linux, there will be at least one context switch [1]). 
   2. April 19 : Client server to embed Redis commend fo quick benchmark (for now).
@@ -78,7 +81,6 @@ This way the project scope is managable.
 
 
 ## April 20 
-
 1. REST API can do multi-query, too, iff API endpoint is defined. 
 Users are said to request exactly want they wanted in graphQL but not in REST.
 REST does this by filtering API endpoint query fields to reduce unnessary queries. 
