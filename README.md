@@ -118,6 +118,28 @@ ChatGPT assistance in:
  3. Paraphrasing 80% first version of readme after techincal discussion, 0% on README across all since 3rd push 
 
 
+##  Disclaimer use of GPT
+
+- 0% AI Priciple on the following 
+  1. 0% Engineering Decision making is done by any LLM model or is referenced by any LLM model responses or guidence.
+  2. 0% Of Incentive of Benchmarking REST vs GraphQL came from any LLM or GPT or AI by reference, suggestion or any kind. The original idea was brainstormed from a MIT research paper on RPG
+  3. During development, important decisions such as what tools to use, is not chosen by GPT or any AI tools. Decisions were made by referencing client server's official website and chosen on implementation constrains.
+  4. 0% Of AI or GPT praticipations in identifying and finding the most efficient tools in
+       1. Redis Fake Data loading
+       2. Code Reduce for V6 load test where common export is shared for optimized fine tuning
+       3. Modulized docker services for unit testing
+       4. Lua Script best Practice in Redis and an Error on our codebase refelcts violation of best practice where Lua script manipulates keys in fake data. 
+ 
+-  0% < x < 50% use of AI on the following:
+  1. First 3 versions on README.md (this file) was summarized by GPT after I input ideas and test methods. 0% Afterwards.
+  2. 0% In other READMEs in other directory under this repo.
+- 50% < x < 100% use of AI:
+    1. Debugging on JavaScript: This is my first JavaScript Project, I use GPT to correct syntax.
+    2. Docker commands and Docker related sytax
+    3. Lua script syntax debugging
+    4. Repo structure
+       
+     
 
 
 CC BY-NC 4.0
