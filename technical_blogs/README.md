@@ -4,7 +4,7 @@
 
 ### This technical log accompanies the bench-the-query project, which benchmarks the performance of REST vs GraphQL APIs under load. The goal is to explore trade-offs in and potential performance drops while analyzing them in a de-noise environment where propogation delays are minimized. Test pipeline: K6, Redis, and Grafana, InfluxDB Dockers. Test Target: FastAPI, GraphQL
 
-## (Future Improvement: I will soon work on making my "deep dives" into Git Pages)
+### (Future Improvement: I will soon work on making my "deep dives" into Git Pages)
 
 - Key dates: 
   1. April 16 : Lua Script has proven to be the fastest way to import fake data into redis, faster than pipe and Riot. This shows the importance of latency introduced by I/O (with linux, there will be at least one context switch [1]). 
