@@ -130,10 +130,10 @@ ChatGPT assistance in:
        3. Modulized docker services for unit testing
        4. Lua Script best Practice in Redis and an Error on our codebase refelcts violation of best practice where Lua script manipulates keys in fake data. 
  
--  0% < x < 50% use of AI on the following:
+- Having 0% < x < 50% use of AI on the following:
   1. First 3 versions on README.md (this file) was summarized by GPT after I input ideas and test methods. 0% Afterwards.
-  2. 0% In other READMEs in other directory under this repo.
-- 50% < x < 100% use of AI:
+  2. Having 0% In other READMEs in other directory under this repo.
+- Having 50% < x < 100% use of AI:
     1. Debugging on JavaScript: This is my first JavaScript Project, I use GPT to correct syntax.
     2. Docker commands and Docker related sytax
     3. Lua script syntax debugging
