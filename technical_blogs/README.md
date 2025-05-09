@@ -2,7 +2,7 @@
 
 # Technical Blog
 
-## This technical log accompanies the bench-the-query project, which benchmarks the performance of REST vs GraphQL APIs under load. The goal is to explore trade-offs in and potential performance drops while analyzing them in a de-noise environment where propogation delays are minimized. Test pipeline: K6, Redis, and Grafana, InfluxDB Dockers. Test Target: FastAPI, GraphQL
+### This technical log accompanies the bench-the-query project, which benchmarks the performance of REST vs GraphQL APIs under load. The goal is to explore trade-offs in and potential performance drops while analyzing them in a de-noise environment where propogation delays are minimized. Test pipeline: K6, Redis, and Grafana, InfluxDB Dockers. Test Target: FastAPI, GraphQL
 
 ## (Future Improvement: I will soon work on making my "deep dives" into Git Pages)
 
