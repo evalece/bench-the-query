@@ -1,26 +1,26 @@
 
 
 # Technical Blog
-- This is a log that records my learning and engineering decisions while developing this benchmark project. 
-- Key dates: 
 
-1. April 16 : Lua Script has proven to be the fastest way to import fake data into redis, faster than pipe and Riot. This shows the importance of latency introduced by I/O (with linux, there will be at least one context switch [1]). 
-2. April 19 : Client server to embed Redis commend fo quick benchmark (for now).
-3. April 20: REST API on resouces-based access: remove POST and pagination by implemnting query via URL. i.e, URL: .../key/search_criteria=c1,c2,c3 
-4. April 26 : Modulaize codes into docker containers as services, take advantages of tools that are self-containerized. 
+## This is a log that records my learning and engineering decisions while developing this benchmark project. 
+- Key dates: 
+  1. April 16 : Lua Script has proven to be the fastest way to import fake data into redis, faster than pipe and Riot. This shows the importance of latency introduced by I/O (with linux, there will be at least one context switch [1]). 
+  2. April 19 : Client server to embed Redis commend fo quick benchmark (for now).
+  3. April 20: REST API on resouces-based access: remove POST and pagination by implemnting query via URL. i.e, URL: .../key/search_criteria=c1,c2,c3 
+  4. April 26 : Modulaize codes into docker containers as services, take advantages of tools that are self-containerized. 
 
 ### Reference 
   [1] https://stackoverflow.com/questions/55331133/do-linux-pipe-read-writes-always-cause-a-context-switch 
 
 ## April 13 2025
-Metrics:
-Response time
-Throughput
-Error rates
+Planned Metrics:
+  - Response time
+  - Throughput
+  - Error rates
 
 
 
-I cheked tools like the following but decides to do low level logging and tracking to stay primtive and transparent.
+- I cheked tools like the following but decides to do low level logging and tracking to stay primtive and transparent.
 In addition, we are only looking at API client efficiency in various query length and throughtput with specific protocols... 
 FastAPI with Grafana
 https://dev.to/ken_mwaura1/getting-started-monitoring-a-fastapi-app-with-grafana-and-prometheus-a-step-by-step-guide-3fbn 
@@ -28,23 +28,23 @@ https://dev.to/ken_mwaura1/getting-started-monitoring-a-fastapi-app-with-grafana
 
 API request <-> API server (port yyy) <--- (potential propogation delay) ---> (port xxx) Redis DB
 
-We track:
-1. query_id
-2. client_sent_time
-3. server_received_time
-4. server_duration
-5. redis_duration
-6. client_received_time
-7. round_trip_time (Propogation delay)
+- We track:
+  1. query_id
+  2. client_sent_time
+  3. server_received_time
+  4. server_duration
+  5. redis_duration
+  6. client_received_time
+  7. round_trip_time (Propogation delay)
 
 
 
 ## April 16 
 Originally planned to complete this project by  April 14ish, but decided to allocate more time to 
 deliver a smarter script that generates and implements 
-1. client code in GraphQL and REST API accross all benchmark 
-2. automates (optional) data importation to Redis with Lua and is customizable 
-3. (side note for 2.) I'm doing flat datasets for now, no subquery, but will do later 
+  1. client code in GraphQL and REST API accross all benchmark 
+  2. automates (optional) data importation to Redis with Lua and is customizable 
+  3. (side note for 2.) I'm doing flat datasets for now, no subquery, but will do later 
 
 
 Next up:
@@ -84,7 +84,7 @@ REST does this by filtering API endpoint query fields to reduce unnessary querie
 
 2. Take a closer look at romise.all() or asyncio.gather() for GraphQL ****
 
-3.Learning today: Dynamic API endpoint in REST API (i.e./endpoint/query fields 1... n) allows users 
+3. Learning today: Dynamic API endpoint in REST API (i.e./endpoint/query fields 1... n) allows users 
 to query exactly what is wanted. Similiar to GraphQL but with extra pagination + less handler complexity
 
 
@@ -124,14 +124,16 @@ Hence, we should create an entry point for users to select their parameters.
 GraphQL and FastAPI load test needs to be run sequentially, and probability in different container for fewer noise. 
 
 A few management tools in my mind summarized:
-K8s: tools to group, deploy, schedule, and instepct status of containers with consideration of load balance (CI). But not CD nor versioning.
-Helm: (Not useful in our case) More like a package manager to keep track of all image versions  
+  - K8s: tools to group, deploy, schedule, and instepct status of containers with consideration of load balance (CI). But not CD nor versioning.
+  - Helm: (Not useful in our case) More like a package manager to keep track of all image versions  
 
-About Redis response time on query: I thought about Redis MONITOR but I/O heavy may skew latency and become potentially misleading. 
-A solution for now: make large load test iteration to allow convergence of distribution.
+  - About Redis response time on query: I thought about Redis MONITOR but I/O heavy may skew latency and become potentially misleading. 
+  - A solution for now: make large load test iteration to allow convergence of distribution.
 
 learning: 
-1. YAML anchor- alternative solution to .env for env var used by multiple containers in one .yml; limitation (vs .env): need to be in one YAML
+1. YAML anchor- alternative solution to .env for env var used by multiple containers in one .yml; limitation (vs .env) is that Yaml anchor needs to be in one YAML.
+  - For example, 
+```bash 
 x-shared-env: &shared-env
   STRING_SIZES: ${STRING_SIZES:-3,5,10,15,30,50,75,100,500,750,1000,1500,2000} 
   ...
@@ -143,6 +145,7 @@ x-shared-env: &shared-env
   graphql_server:
     image: node:18
     environment: *shared-env
+```
 
 2. Review of Lua Script, take the advantage of arg1...n
 ```bash 
