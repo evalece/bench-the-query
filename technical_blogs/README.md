@@ -8,15 +8,16 @@
   2. April 19 : Client server to embed Redis commend fo quick benchmark (for now).
   3. April 20: REST API on resouces-based access: remove POST and pagination by implemnting query via URL. i.e, URL: .../key/search_criteria=c1,c2,c3 
   4. April 26 : Modulaize codes into docker containers as services, take advantages of tools that are self-containerized. 
+  5. May 08 : 24 hrs after first pre-releasaed, some feedack is summarized. 
 
 ### Reference 
   [1] https://stackoverflow.com/questions/55331133/do-linux-pipe-read-writes-always-cause-a-context-switch 
 
 ## April 13 2025
-Planned Metrics:
-  - Response time
-  - Throughput
-  - Error rates
+- Planned Metrics:
+  1. Response time
+  2. Throughput
+  3. Error rates
 
 
 
@@ -48,19 +49,19 @@ deliver a smarter script that generates and implements
 
 
 Next up:
-1. Reading: 
+- Reading: 
   - Concurrency & CPU related topics reading- currently all using asynch non-blocking but need to look into concurrent reques and spike.
   - Present hardware health with latency and other findings (knowing these causes unfairness).
-2. More Writing:
+- More Writing:
   - Explain potentail unfairness and metigations in my baseline GraphQL REST- mimicing model
 
 
 ## April 19
-1. Load test using k6
+- Load test using k6
   - allow users to import text files to specify scheduled load (https://www.youtube.com/watch?v=1mtYVDA2_iQ)
   - Pack k6 as part of the image for all-in-one -> reduce build time 
 
-2. K6 and I/O with potential bias
+- K6 and I/O with potential bias
   - Use a 2-phase test pattern (warmup → benchmark)
 
   - Phase 1: Run a short warm-up or data capture phase (with I/O)
@@ -90,7 +91,7 @@ to query exactly what is wanted. Similiar to GraphQL but with extra pagination +
 
 ## April 22 
 
-1. containerize +pass command via script + or, docker image if bootstraps logic complex
+Containerize +pass command via script + or, docker image if bootstraps logic complex
 
 
 ## April 24
@@ -104,12 +105,12 @@ FastAPI <-> Redis OK (Containerized)
 ## April 26
 Docker stats - Perfomance & Benchmarking is viewed from Containers
 
-0. For API endpoint, focues on Request rate. rate = RequestsRate ÷ RequestsPerIteration.https://grafana.com/docs/k6/latest/testing-guides/api-load-testing/#request-rate
-0. Load test user paramaters + avoid reinventing wheels: vus; duration; iterations; Request rate
-0. Important: compare K6 oad test for K6 in test environment as baseline [1]. 
-1. user container/ K6 load test container 
-2. client Sever container; CPU usage, Network I/O, Disk I/O (including server size)
-3. Redis container:  Network I/O to discount propogation delay 
+1. For API endpoint, focues on Request rate. rate = RequestsRate ÷ RequestsPerIteration.https://grafana.com/docs/k6/latest/testing-guides/api-load-testing/#request-rate
+2. Load test user paramaters + avoid reinventing wheels: vus; duration; iterations; Request rate
+3. Important: compare K6 oad test for K6 in test environment as baseline [1]. 
+4. user container/ K6 load test container 
+5. client Sever container; CPU usage, Network I/O, Disk I/O (including server size)
+6. Redis container:  Network I/O to discount propogation delay 
 
 ### Reference
   [1] Api-load-testing. K6. URL:  https://grafana.com/docs/k6/latest/testing-guides/api-load-testing/
@@ -148,19 +149,19 @@ x-shared-env: &shared-env
 ```
 
 2. Review of Lua Script, take the advantage of arg1...n
-```bash 
-redis-cli EVAL <script> <numkeys> <key1> <key2> ... , <arg1> <arg2> ...
-```
+    ```bash 
+    redis-cli EVAL <script> <numkeys> <key1> <key2> ... , <arg1> <arg2> ...
+    ```
 
 3. K6 Load test script code: 
-- Reduce repeated part to be imported by all load test; hence, one file will change all load tests.
+  - Reduce repeated part to be imported by all load test; hence, one file will change all load tests.
 
 4. Project wide env var, the following will be passed as env var and automated.
-```bash 
-- # .env, otherwise set by user during docker compose up 
-STRING_SIZES=3,5,10,15,30,50,75,100,500,750,1000,1500,2000
-NUM_USER=10
-```
+  ```bash 
+  - # .env, otherwise set by user during docker compose up 
+  STRING_SIZES=3,5,10,15,30,50,75,100,500,750,1000,1500,2000
+  NUM_USER=10
+  ```
 
 ## May 07 
 
@@ -191,5 +192,19 @@ To make use of the pre-config feature, which is already made to present laod tes
 
 
 
+## May 08 First Day Of Pre-Release & Feedback
+
+- To summarize feedback & possible future updates:
+  1. Suggestions on benchmarking subscriton events from DB.
+  2. Web-focuse benchmark
+  3. PUT and POST Benchmark (The first version intentionally support only GET to serve as a baseline for future versions). 
+
+- Future Dev Priority (based on feedback so far):
+  1. Streamline PUT and POST method in current codebase (in fact easy to make, since I coded with minimal security concern by allowing end users to pass Redis command)
+  2. Look into subscription benchmark and how different client server may handle it differently (Some client servers may not be suitable for subscription benchmarking.)
+  3. Continue 2., I need to look into Websockets. 
+
+
+  
 
 
