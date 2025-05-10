@@ -116,8 +116,6 @@ see   [View the log](technical_blogs/README.md)  for more development story!
 
 CC BY-NC 4.0
 
-Author: Eva Liu; lj2liu@uwaterloo.ca
-
 
 ##  Disclaimer use of GPT
 
