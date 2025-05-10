@@ -17,7 +17,7 @@
 - Furthermore, benchmark results are made accessible in a pre-configured Grafana Dashboard. 
 - Users use this tool by entering a list of payload size used in querying and setting desire loads in load test the same way as K6 load test. 
 
-## Bench the Query under the hood:
+## Bench the Query under the hood
 
 A containerized benchmarking suite to compare GraphQL and REST API (FastAPI for now, more later) performance under simulated load using K6 while enabling realtime tracking in Grafana.
   If -> desinates dataflow, we have: 
