@@ -114,12 +114,9 @@ see   [View the log](technical_blogs/README.md)  for more development story!
 
 ##  License
 
+CC BY-NC 4.0
+
 Author: Eva Liu; lj2liu@uwaterloo.ca
-Initially for job seeking + reviewing & learning DB & distributed sys purpose
-ChatGPT assistance in: 
- 1. Grammar and proof read of document writing. 
- 2. Readability of ReadMe and comments. 
- 3. Paraphrasing 80% first version of readme after techincal discussion, 0% on README across all since 3rd push 
 
 
 ##  Disclaimer use of GPT
@@ -145,7 +142,5 @@ ChatGPT assistance in:
        
      
 
-
-CC BY-NC 4.0
 
 
