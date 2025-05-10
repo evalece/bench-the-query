@@ -105,7 +105,11 @@ see   [View the log](technical_blogs/README.md)  for more development story!
  10. riot https://redis.github.io/riot/#_datagen_struct and fake data gen : https://www.datafaker.net/ 
 
 
+## Contributor 
 
+<a href="https://github.com/evalece/RAG/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=evalece/RAG" />
+</a>
 
 
 ##  License
