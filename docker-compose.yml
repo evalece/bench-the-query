@@ -7,17 +7,41 @@ networks:
 services:
 
 
-#############   Database  ######################
+#############   Database and ToxyProxy  ######################
   redis:
     container_name: redis_bench_query
     build: ./redis # Redis Stack image + Lua script for fake dataloading; #load test works with default fake dataset, See readme.
     ports:
-      - "6370:6379" # This field is fixed until later dev changes ; container: 6379
+      - "6379:6379" # This field is fixed until later dev changes ; container: 6379
     env_file: # debug, user default command for payload + user number 
       - ./.env
     
     networks:
       - bench_q 
+
+  toxiproxy:
+    image: ghcr.io/shopify/toxiproxy
+    container_name: toxiproxy
+    #environment:
+      #TOXIPROXY_HOST: '0.0.0.0' iff not loading -config
+    ports:
+      - "8474:8474"  # Control proxy API # side note, a:b, message sent to host port a will be forwared to container port b 
+      - "6380:6380" # Port 6380 Accessible externally from container
+      #- "4000:6380"  # host:container port mapping. <- apply this two via CLI scripts via 6380 at run time
+      #- "6379:6380"
+    depends_on: 
+      - redis
+    volumes:
+      - .ToxyProxy/toxiproxy.json:/config/toxiproxy.json
+    command:
+      - -config
+      - /config/toxiproxy.json
+      - -host
+      - 0.0.0.0
+
+    networks:
+      - bench_q 
+
 
 
 #############   Client Server   ######################
@@ -28,10 +52,7 @@ services:
     ports:
       - "4000:4000" # container: graphQL port 4000 pred-defined in code 
     depends_on: #dependent images will get built first
-      - redis
-    #environment:
-      # Preservered field for scirpt control feature; this helps future development in 
-      # multilevel query/ subquery
+      - toxiproxy
     networks:
       - bench_q 
 
@@ -43,7 +64,7 @@ services:
     tmpfs:
       - /data # client server may cache something, but discard after closing container
     depends_on: #dependent images will get built first
-      - redis
+      - toxiproxy
     networks:
       - bench_q 
     #environment:
@@ -57,8 +78,8 @@ services:
   k6_fastAPI_load_test: # for next update, do them sequentially instead of roughly parallelly at concurrent request
     image: grafana/k6
     container_name: fastAPI_load_test
-    ports:
-      - "1100:1100" # Don't really need ports since not listening 
+    depends_on:
+      - graphql  # Ensure the 'graphql' service is ready before running test
     volumes:
       - ./load_test/results:/result
       - ./load_test/scripts:/scripts
@@ -71,9 +92,6 @@ services:
 
     env_file: # debug, user default command for payload;
       - ./.env
-    
-    # depends_on:
-    #   - graphql  # Ensure the 'graphql' service is ready before running test
   
     command:  run  /scripts/fastAPI_test.js 
  #run --summary-export /results/graphQL_test.json  /scripts/graphQL_test.js 
@@ -111,7 +129,7 @@ services:
     networks:
       - bench_q
     depends_on:
-      - k6
+      - k6_fastAPI_load_test
     environment:
       - INFLUXDB_DB=k6db #database name; listenign port: http://influxdb:8086/k6db
 
@@ -140,24 +158,4 @@ volumes: # For presistance in dashboard and logging
   influxdb_data:
   grafana_data:
   
-# Next: 
-# 
 
-### If any sub component fails:
-# docker-compose up -d failed_instance
-
-#### Gracefulluy shutdown:
-# docker-compose down
-
-
-#### aggregated containers: 
-# docker-compose  -d -p bench_query up: starts the containers in background, non-blocking 
-
-# docker-compose -p bench_query up: blocking; shows all logs
-
-#####
-# docker-compose build  : create image
-
-# docker-compose up  /   docker-compose up  -p bech_q : build automatically; docker check image upate
-
-# docker-compose up --build     : force reebuild and run

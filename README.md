@@ -29,7 +29,7 @@ A containerized benchmarking suite to compare GraphQL and REST API (FastAPI for 
 
 # Running Bench the Query 
 Git clone the project
-## Step 1
+## Step 1 Place Payload Size Variabilities 
 ```bash 
 git clone https://github.com/evalece/bench-the-query.git 
 ```
@@ -45,21 +45,45 @@ NUM_USER=10
 
 ```
 
-## Step 2
+## Step 2 Stress Client Servers with Toxic Proxy, TCP Backpressure, High RTT and MORE!!!
 
-Customize your K6 load test if you need at:
+Customize your K6 load test and Toxy Proxy [11] to control traffic flow and latencies to further test client server's handling ability. see [11] repo should you need to customize toxics for Toxy Proxy.
+
+- To do so, we will first compose up Toxy Proxy:
+```bash 
+docker-compose -f docker-compose.infra.yml up
+```
+- Next, at a seperate termianl, pass the following to route listenig ports with upcoming client server ports 
+```bash 
+curl -X POST http://localhost:6380/proxies -d '{
+  "name": "grphQL_redis_proxy",
+  "listen": "0.0.0.0:4000",
+  "upstream": "redis:6379"
+}'
+```
+
+```bash 
+curl -X POST http://localhost:6380/proxies -d '{
+  "name": "fastAPI_redis_proxy",
+  "listen": "0.0.0.0:8000",
+  "upstream": "redis:6379"
+}'
+```
 
 [View the script](load_test/scripts/k6_options.js)
 
 (For best use of pre-config dashboard, do not delete tags or rename them). 
 
 
-## Step 3 (Last step)
+## Step 3 Boot up Client Server, Load tests and Grafana Dashboard(Last step)
+To comppose:
 
-Docker-Compose EVERYTHING up 
+- Client servers: Docker-compose.client.yml up
+- Load test with Grafana: Docker-compose.load.yml up
+
 ```bash 
-
-docker-compose up
+docker-compose -f docker-compose.client.yml up
+docker-compose -f docker-compose.load.yml up
 
 ```
 And accessing results later by loading pre-config dashboard at 
@@ -103,6 +127,7 @@ see   [View the log](technical_blogs/README.md)  for more development story!
  8. For REST; Java+Spring- https://redis.io/learn/develop/java/redis-and-spring-course/lesson_2 
  9. Redis Dataset: https://github.com/redis-developer/redis-datasets 
  10. riot https://redis.github.io/riot/#_datagen_struct and fake data gen : https://www.datafaker.net/ 
+ 11. Toxy Proxy by Shopify https://github.com/Shopify/toxiproxy 
 
 
 
