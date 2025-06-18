@@ -36,6 +36,23 @@ git clone https://github.com/evalece/bench-the-query.git
 
 If needed, adjust .env for desired payload lenghth. These are contents in string sizes and will be requested by K6 load test user via GET method. You can also set a desired number of users holding these values in Redis. If not, we will use defualt: 
 
+- In case Redis Stack fail to generate datasets automatically, open the container terminal and at entrypoint, enter the following:
+
+
+[URL](./redis/entrypoint.sh)
+
+
+```bash
+export json_ss="[$STRING_SIZES]"
+redis-cli --eval /0.lua , "$NUM_USER" "$json_ss"
+```
+
+```bash
+redis-cli --eval 0.lua user:1 user:2 user:3
+redis-cli --eval 1.lua user:1 user:2 user:3
+redis-cli --eval 2.lua user:1 user:2 user:3
+```
+
 [View the script](./env)
 
 ```bash

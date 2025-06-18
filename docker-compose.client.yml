@@ -1,0 +1,35 @@
+version: "3.8"
+
+#####   Container networks #######
+networks:
+  bench_q:
+    driver: bridge
+services:
+#############   Client Server   ######################
+  graphql:
+    build: ./generic_graphQL  # Allows user to query with Redis CLI
+    tmpfs:
+      - /data # client server may cache something, but discard after closing container
+    ports:
+      - "4000:4000" # container: graphQL port 4000 pred-defined in code 
+
+    networks:
+      - bench_q 
+
+
+  fast_api:
+    build: ./generic_FastAPI/restAPI/fastAPI  # Allows user to query with Redis CLI
+    ports:
+      - "8000:8000" # container: fastAPI port 8000 pred-defined in code 
+    tmpfs:
+      - /data # client server may cache something, but discard after closing container
+    environment:
+      - REDIS_HOST=toxiproxy
+      - REDIS_PORT=6380
+
+    networks:
+      - bench_q 
+    #environment:
+      # Preservered field for scirpt control feature; this helps future development in 
+      # multilevel query/ subquery
+      # CLI in defualt dataset benchmark 

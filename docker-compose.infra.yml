@@ -1,0 +1,41 @@
+version: "3.8"
+
+#####   Container networks #######
+networks:
+  bench_q:
+    driver: bridge
+services:
+
+
+#############   Database and ToxyProxy  ######################
+  redis:
+    container_name: redis
+    build: ./redis # Redis Stack image + Lua script for fake dataloading; #load test works with default fake dataset, See readme.
+    ports:
+      - "6380:6379" # This field is fixed until later dev changes ; container: 6379
+    env_file: # debug, user default command for payload + user number 
+      - ./.env
+    
+    networks:
+      - bench_q 
+
+  toxiproxy:
+    image: ghcr.io/shopify/toxiproxy
+    container_name: toxiproxy_bench_query
+    #environment:
+      #TOXIPROXY_HOST: '0.0.0.0' iff not loading -config
+    ports:
+      - "8474:8474"  # Control proxy API # side note, a:b, message sent to host port a will be forwared to container port b 
+      
+    depends_on: 
+      - redis
+    volumes:
+      - ./ToxyProxy/toxiproxy.json:/config/toxiproxy.json
+    command:
+      - -config
+      - /config/toxiproxy.json
+      - -host
+      - 0.0.0.0
+
+    networks:
+      - bench_q 

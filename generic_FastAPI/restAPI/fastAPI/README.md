@@ -4,7 +4,7 @@
 ## Query:
 
 format: localhost:8000/user/{user_id}/ field1 field2
-example: localhost:8000/user/1/ v5 v15
+localhost:8000/user/1/ v5 v15
 
 ## Unvicorn root
 ## PYTHONPATH=$(pwd) uvicorn main:app --reload 
