@@ -23,7 +23,7 @@
 #### Datastore Options  
 
 | Name | Description | Type | Setup |  Default value |
-| --- | --- | --- | --- |
+| -------------- | ----------------  | ----------- | ------- | ---------------- |
 | `STRING_SIZES` | Dataset sizes in String count to be loaded to DB upon compose up | env var, deploy before pipeline runtime | ./env | `3,5,10,15,30,50,75,100,500,750,1000,1500,2000` |
 | `NUM_USER` | Number of users to be loaded in DB | env var, deploy before pipeline runtime  | ./env | `10` |
 
@@ -40,7 +40,7 @@
   [2]https://grafana.com/docs/k6/latest/using-k6/execution-context-variables/
 
 | Name | Description | Type | Setup |  Default value |
-| --- | --- | --- | --- |
+| -------------- | ----------------  | ----------- | ------- | ----------------------- |
 | `vus` | K6 virtual users by host machine threads  | java script, deploy at pipeline runtime | ./load_test/scripts/k6_options.js| `20` |
 | `iterations` | java script, deploy at pipeline runtime | ./load_test/scripts/k6_options.js| `100` |
 
