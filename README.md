@@ -66,19 +66,19 @@
 | `slicer` | Slice to fit specific packet size in Bytes, allowing latency addition between packet on silicer attribute| HTTP field | -- | `0` |
 
 
-## Bench the Query under the hood:
+#### Bench the Query under the hood
 
 A containerized benchmarking suite to compare GraphQL and REST API (FastAPI for now, more later) performance under simulated load using K6 while enabling realtime tracking in Grafana.
   If -> desinates dataflow, we have: 
   Lua script -> Redis <-> GraphQL & FastAPI <-> K6 -> InfluxDB-> Grafana. 
 
-## What Bench the Query is not?
+#### What Bench the Query is not?
 - While more client servers are to be added more a more inclusive benchmark test, the client protocols and security checks are not made to be serve production codes. 
 
 
-# Running Bench the Query 
+## Quick Start 
 Git clone the project
-## Step 1 Place Payload Size Variabilities 
+### Step 1 - Place Payload Size Variabilities 
 ```bash 
 git clone https://github.com/evalece/bench-the-query.git 
 ```
@@ -111,7 +111,7 @@ NUM_USER=10
 
 ```
 
-## Step 2 Stress Client Servers with Toxic Proxy, TCP Backpressure, High RTT and MORE!!!
+### Step 2 - Stress Client Servers with Toxic Proxy, TCP Backpressure, High RTT and MORE!!!
 
 Customize your K6 load test and Toxy Proxy [11] to control traffic flow and latencies to further test client server's handling ability. see [11] repo should you need to customize toxics for Toxy Proxy.
 
@@ -141,7 +141,7 @@ curl -X POST http://localhost:6380/proxies -d '{
 (For best use of pre-config dashboard, do not delete tags or rename them). 
 
 
-## Step 3 Boot up Client Server, Load tests and Grafana Dashboard(Last step)
+### Step 3 - Boot up Client Server, Load tests and Grafana Dashboard(Last step)
 To comppose:
 
 - Client servers: Docker-compose.client.yml up
@@ -162,7 +162,7 @@ Result at:
 http://localhost:3000
 ```
 
-## (Optional Step) Accessing Results
+### (Optional Step) Accessing Results
 For accessing the results the first time in Grafana, use the following credential:
 
 Load Live Grafana Dashboard (if using dashboard 2587 with K6 default metrics) 
@@ -199,7 +199,7 @@ see   [Technical Blogs](technical_blogs/README.md)  for more development story!
 
 
 
-##  License
+###  License
 
 Author: Eva Liu; lj2liu@uwaterloo.ca
 Initially for job seeking + reviewing & learning DB & distributed sys purpose
