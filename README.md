@@ -19,6 +19,10 @@
 - Furthermore, benchmark results are made accessible in a pre-configured Grafana Dashboard. 
 - Users use this tool by entering a list of payload size used in querying and setting desire loads in load test the same way as K6 load test. 
 
+##  Installation and Setup 
+
+[Setup Instructions](setup.md)
+
 
 ## Benchmark Options
 
