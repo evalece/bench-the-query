@@ -24,7 +24,7 @@
 
 | Name | Description | Type | Setup |  Default value |
 | -------------- | --------------------  | ------------------ | ---- | ------ |
-| `STRING_SIZES` | String count dataset; <br>loaded to DB at compose up | env var, deploy before <br> pipeline runtime | ./env | 3,5,10,<br>,15,30,50,75,100,500,750,1000,1500,2000 |
+| `STRING_SIZES` | String count dataset; <br>loaded to DB at compose up | env var, deploy before <br> pipeline runtime | ./env | 3,5,10,<br>,15,30,50<br>,75,100,500,<br>750,1000,1500,<br>2000 |
 | `NUM_USER` | Number of users to be loaded in DB | env var, deploy before pipeline runtime  | ./env | `10` |
 
 
