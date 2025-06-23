@@ -54,7 +54,7 @@
   - Toxy Proxy by Shopfiy is injected between client server and RedisDB to similate rate limiting, RTT, traffic surges and other unforeseen challenges. 
   - The goal is to examine client server strategy and adpatation under a degaradated system. 
   - TCP pakcets and traffics are simulated by K6.
-- Reference 
+- Reference <br>
  [1]https://github.com/Shopify/toxiproxy?tab=readme-ov-file#http-api 
 
 | Name | Description | Type | Setup | Remark for simulation |  Default value |
