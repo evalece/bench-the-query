@@ -46,7 +46,7 @@
   [2]https://grafana.com/docs/k6/latest/using-k6/execution-context-variables/ <br>
 
 | Name | Description | Type | Setup |  Default value |
-| :--------------: | :----------------:  | ----------- | ------- | ----------------------- |
+| :-------------- | :----------------  | ----------- | ------- | ----------------------- |
 | `vus` | K6 virtual users by <br> host machine threads | java script <br>, deploy at pipeline runtime | ./load_test/scripts/k6_options.js| `20` |
 | `iterations` | K6 VUs' task iterations |java script, deploy at pipeline runtime | ./load_test/scripts/k6_options.js| `100` |
 
@@ -58,7 +58,7 @@
  [1]https://github.com/Shopify/toxiproxy?tab=readme-ov-file#http-api 
 
 | Name | Description | Type | Setup | Remark for simulation |  Default value |
-| :--------------: | :----------------:  | :--------------: | :----------------:  | :--------------: | :----------------:  |
+| :-------------- | :----------------  | :-------------- | :----------------  | :-------------- | :----------------  |
 | `latency` | A delay to all data going through the proxy in ms. | HTTP field | RTT simulation; can apply seperately to up and downstream | `0` |
 | `jitter` | The delay is equal to latency +/- jitter ms. | HTTP field | set 0 |`0` |
 | `limit_data` |Closes connection if data transmitted exceeded limit.  | HTTP field | Rate limiting | `0` |
