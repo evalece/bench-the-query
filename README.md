@@ -10,6 +10,8 @@
 ![schematic](in-dev-screen/final_result.png)
 
 ## What is Bench the Query?
+
+ ![schematic](proxy_pipeline.jpeg) 
 - Bench the Query helps developers to choose client servers based on traffic load and context size.
 - The containerized Benchmark tool are light-weighted and can be tested seperately.
 - A versatile tool to benchmark various client servers with minimal code. 
@@ -47,9 +49,7 @@
 #### Toxy Proxy Options  
   - Toxy Proxy by Shopfiy is injected between client server and RedisDB to similate rate limiting, RTT, traffic surges and other unforeseen challenges. 
   - The goal is to examine client server strategy and adpatation under a degaradated system. 
-  - TCP pakcets and traffics are simulated by K6 see schematic below:
- ![schematic](proxy_pipeline.jpeg) 
-  - Use Http API to setup toxy [1]
+  - TCP pakcets and traffics are simulated by K6.
 - Reference 
  [1]https://github.com/Shopify/toxiproxy?tab=readme-ov-file#http-api 
 
