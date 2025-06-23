@@ -1,0 +1,15 @@
+
+[
+  {
+    "name": "fastAPI",
+    "listen": "[::]:6380",
+    "upstream": "redis:6379",
+    "enabled": true
+  },
+  {
+    "name": "graphQL",
+    "listen": "[::]:6380",
+    "upstream": "redis:6379",
+    "enabled": true
+  }
+]

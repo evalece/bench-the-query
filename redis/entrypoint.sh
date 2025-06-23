@@ -14,9 +14,17 @@ sleep 2
 # Preload your Lua data 
 # redis-cli EVAL <script> <numkeys> <key1> <key2> ... , <arg1> <arg2> ...
 
-redis-cli EVAL "$(cat /0.lua)" 0 "$NUM_USER" "$SIZES_JSON" # customized; lua wrties this way to prevent lua from accessing keys 
-# redis-cli EVAL "$(cat /1.lua)" 10 user:1 user:2 user:3 user:4 user:5 user:6 user:7 user:8 user:9 user:10 
-# redis-cli EVAL "$(cat /2.lua)" 10 user:1 user:2 user:3 user:4 user:5 user:6 user:7 user:8 user:9 user:10
+###### you may need to mannually enter the following at entry point line by line 
+
+export json_ss="[$STRING_SIZES]"
+redis-cli --eval 0.lua , "$NUM_USER" "$json_ss"
+redis-cli --eval 1.lua , "$NUM_USER"
+redis-cli --eval 2.lua , "$NUM_USER"
+
+
+
+
+
 
 # Enable client-side tracking with broadcast mode to simulate cold cache always 
 redis-cli CLIENT TRACKING ON BROADCAST PREFIX user:

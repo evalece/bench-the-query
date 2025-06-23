@@ -10,7 +10,7 @@ services:
     container_name: redis_bench_query_debug
     build: ./ # Redis Stack image + Lua script for fake dataloading; #load test works with default fake dataset, See readme.
     ports:
-      - "6370:6379" # This field is fixed until later dev changes ; container: 6379
+      - "6379:6379" # This field is fixed until later dev changes ; container: 6379
     #environment:
       # Preservered field for scirpt control feature; this helps future development in 
       # multilevel query/ subquery
