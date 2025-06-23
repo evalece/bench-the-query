@@ -41,8 +41,8 @@
 
 | Name | Description | Type | Setup |  Default value |
 | :--------------: | :----------------:  | ----------- | ------- | ----------------------- |
-| `vus` | K6 virtual users by <br> host machine threads | java script, deploy at pipeline runtime | ./load_test/scripts/k6_options.js| `20` |
-| `iterations` | java script, deploy at pipeline runtime | ./load_test/scripts/k6_options.js| `100` |
+| `vus` | K6 virtual users by <br> host machine threads | java script <br>, deploy at pipeline runtime | ./load_test/scripts/k6_options.js| `20` |
+| `iterations` | K6 VUs' task iterations |java script, deploy at pipeline runtime | ./load_test/scripts/k6_options.js| `100` |
 
 #### Toxy Proxy Options  
   - Toxy Proxy by Shopfiy is injected between client server and RedisDB to similate rate limiting, RTT, traffic surges and other unforeseen challenges. 
