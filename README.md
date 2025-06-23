@@ -21,7 +21,7 @@
 
 ##  Installation and Setup 
 
-[Setup Instructions](setup.md)
+[Bench the Query Setup Instructions](setup.md)
 
 
 ## Benchmark Options
@@ -87,7 +87,7 @@ If needed, adjust .env for desired payload lenghth. These are contents in string
 - In case Redis Stack fail to generate datasets automatically, open the container terminal and at entrypoint, enter the following:
 
 
-[URL](./redis/entrypoint.sh)
+[Redis Docker Image Entry Point](./redis/entrypoint.sh)
 
 
 ```bash
@@ -101,7 +101,7 @@ redis-cli --eval 1.lua user:1 user:2 user:3
 redis-cli --eval 2.lua user:1 user:2 user:3
 ```
 
-[View the script](./env)
+[Datastore and Client-server schema Environment Variable](./env)
 
 ```bash
 # .env, otherwise set by user during docker compose up 
@@ -135,7 +135,7 @@ curl -X POST http://localhost:6380/proxies -d '{
 }'
 ```
 
-[View the script](load_test/scripts/k6_options.js)
+[K6 customizable Java Script ](load_test/scripts/k6_options.js)
 
 (For best use of pre-config dashboard, do not delete tags or rename them). 
 
@@ -175,11 +175,11 @@ Load Live Grafana Dashboard (if using dashboard 2587 with K6 default metrics)
  ```
 
 Alternatively, see instructions at the following if you would like to setup your own
-[View extra note](influxDB/readme.md)
+[InfluxDB Implementation](influxDB/readme.md)
 
 ## More?
 
-see   [View the log](technical_blogs/README.md)  for more development story!
+see   [Technical Blogs](technical_blogs/README.md)  for more development story!
 
 ## Reference
  1. Dataset: https://www.kaggle.com/datasets/rohanadagouda/cleaned-dataset 
