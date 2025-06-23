@@ -17,6 +17,51 @@
 - Furthermore, benchmark results are made accessible in a pre-configured Grafana Dashboard. 
 - Users use this tool by entering a list of payload size used in querying and setting desire loads in load test the same way as K6 load test. 
 
+
+## Benchmark Options
+
+#### Datastore Options  
+
+| Name | Description | Type | Setup |  Default value |
+| --- | --- | --- | --- |
+| `STRING_SIZES` | Dataset sizes in String count to be loaded to DB upon compose up | env var, deploy before pipeline runtime | ./env | `3,5,10,15,30,50,75,100,500,750,1000,1500,2000` |
+| `NUM_USER` | Number of users to be loaded in DB | env var, deploy before pipeline runtime  | ./env | `10` |
+
+
+#### Load Test Options 
+
+ Bench the Query currently supports cold cache DB + GET request on load test  via K6. To utilize automated pre-configured Grafana uptream live monitoring dashboard it is encouraged the user follows the recoomended options:
+  - Enabling parallel and sequntial load testing with virtual user (VUs) as thread to simulate users.
+  - Customize a sheduled traffic surge with K6's format [1]. 
+  - Stick with K6 load test metrics at reference [2] for efficient upstream processing.
+
+- Reference 
+  [1]https://grafana.com/docs/k6/latest/set-up/set-up-distributed-k6/usage/scheduling-tests/ 
+  [2]https://grafana.com/docs/k6/latest/using-k6/execution-context-variables/
+
+| Name | Description | Type | Setup |  Default value |
+| --- | --- | --- | --- |
+| `vus` | K6 virtual users by host machine threads  | java script, deploy at pipeline runtime | ./load_test/scripts/k6_options.js| `20` |
+| `iterations` | java script, deploy at pipeline runtime | ./load_test/scripts/k6_options.js| `100` |
+
+#### Toxy Proxy Options  
+- Summary 
+  - Toxy Proxy by Shopfiy is injected between client server and RedisDB to similate rate limiting, RTT, traffic surges and other unforeseen challenges. 
+  - The goal is to examine client server strategy and adpatation under a degaradated system. 
+  - TCP pakcets and traffics are simulated by K6 see schematic below:
+ ![schematic](proxy_pipeline.jpeg) 
+  - Use Http API to setup toxy [1]
+- Reference 
+ [1]https://github.com/Shopify/toxiproxy?tab=readme-ov-file#http-api 
+
+| Name | Description | Type | Setup | Remark for simulation |  Default value |
+| `latency` | A delay to all data going through the proxy in ms. | HTTP field | RTT simulation; can apply seperately to up and downstream | `0` |
+| `jitter` | The delay is equal to latency +/- jitter ms. | HTTP field | set 0 |`0` |
+| `limit_data` |Closes connection if data transmitted exceeded limit.  | HTTP field | Rate limiting | `0` |
+| `rate` | Maximum connection rate on Proxy in KB/s. | HTTP field | -- | `0` |
+| `slicer` | Slice to fit specific packet size in Bytes, allowing latency addition between packet on silicer attribute| HTTP field | -- | `0` |
+
+
 ## Bench the Query under the hood:
 
 A containerized benchmarking suite to compare GraphQL and REST API (FastAPI for now, more later) performance under simulated load using K6 while enabling realtime tracking in Grafana.
