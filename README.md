@@ -24,7 +24,7 @@
 
 | Name | Description | Type | Setup |  Default value |
 | -------------- | --------------------  | ------------------ | ---- | ------ |
-| `STRING_SIZES` | Dataset sizes in String count to be loaded to DB upon compose up | env var, deploy before pipeline runtime | ./env | `3,5,10,15,30,50,75,100,500,750,1000,1500,2000` |
+| `STRING_SIZES` | String count dataset; <br>loaded to DB at compose up | env var, deploy before <br> pipeline runtime | ./env | `3,5,10,15,30,50,75,100,500,750,1000,1500,2000` |
 | `NUM_USER` | Number of users to be loaded in DB | env var, deploy before pipeline runtime  | ./env | `10` |
 
 
@@ -36,12 +36,12 @@
   - Stick with K6 load test metrics at reference [2] for efficient upstream processing.
 
 - Reference 
-  [1]https://grafana.com/docs/k6/latest/set-up/set-up-distributed-k6/usage/scheduling-tests/ 
-  [2]https://grafana.com/docs/k6/latest/using-k6/execution-context-variables/
+  [1]https://grafana.com/docs/k6/latest/set-up/set-up-distributed-k6/usage/scheduling-tests/ <br>
+  [2]https://grafana.com/docs/k6/latest/using-k6/execution-context-variables/ <br>
 
 | Name | Description | Type | Setup |  Default value |
-| -------------- | ----------------  | ----------- | ------- | ----------------------- |
-| `vus` | K6 virtual users by host machine threads  | java script, deploy at pipeline runtime | ./load_test/scripts/k6_options.js| `20` |
+| :--------------: | :----------------:  | ----------- | ------- | ----------------------- |
+| `vus` | K6 virtual users by <br> host machine threads | java script, deploy at pipeline runtime | ./load_test/scripts/k6_options.js| `20` |
 | `iterations` | java script, deploy at pipeline runtime | ./load_test/scripts/k6_options.js| `100` |
 
 #### Toxy Proxy Options  
