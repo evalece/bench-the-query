@@ -24,7 +24,7 @@
 
 | Name | Description | Type | Setup |  Default value |
 | -------------- | --------------------  | ------------------ | ---- | ------ |
-| `STRING_SIZES` | String count dataset; <br>loaded to DB at compose up | env var, deploy before <br> pipeline runtime | ./env | `3,5,10,15,30,50,75,100,500,750,1000,1500,2000` |
+| `STRING_SIZES` | String count dataset; <br>loaded to DB at compose up | env var, deploy before <br> pipeline runtime | ./env | 3,5,10,<br>,15,30,50,75,100,500,750,1000,1500,2000 |
 | `NUM_USER` | Number of users to be loaded in DB | env var, deploy before pipeline runtime  | ./env | `10` |
 
 
@@ -45,7 +45,6 @@
 | `iterations` | java script, deploy at pipeline runtime | ./load_test/scripts/k6_options.js| `100` |
 
 #### Toxy Proxy Options  
-- Summary 
   - Toxy Proxy by Shopfiy is injected between client server and RedisDB to similate rate limiting, RTT, traffic surges and other unforeseen challenges. 
   - The goal is to examine client server strategy and adpatation under a degaradated system. 
   - TCP pakcets and traffics are simulated by K6 see schematic below:
