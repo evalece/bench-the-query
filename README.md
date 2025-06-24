@@ -55,8 +55,8 @@
   - The goal is to examine client server strategy and adpatation under a degaradated system. 
   - TCP pakcets and traffics are simulated by K6.
 - Reference <br>
- [1]https://github.com/Shopify/toxiproxy?tab=readme-ov-file#http-api 
-iiisii
+ [1]https://github.com/Shopify/toxiproxy?tab=readme-ov-file#http-api <br>
+
 | Name | Description | Type | Remark for simulation |  Default value |
 | :-------------- | :----------------  | :-------------- | :----------------  | :-------------- |
 | `latency` | A delay to all data going through the proxy in ms. | HTTP field | RTT simulation; can apply seperately to up and downstream | `0` |
