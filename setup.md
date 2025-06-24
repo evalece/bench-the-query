@@ -1,7 +1,7 @@
 # Step 1: Clone benchmark repo
 ```bash
-git clone 
-cd benchmark
+git clone https://github.com/evalece/bench-the-query
+cd bench-the-query
 ```
 # Step 2: Build the Docker image locally where needs local build 
 ```bash
