@@ -56,8 +56,8 @@
   - TCP pakcets and traffics are simulated by K6.
 - Reference <br>
  [1]https://github.com/Shopify/toxiproxy?tab=readme-ov-file#http-api 
-
-| Name | Description | Type | Setup | Remark for simulation |  Default value |
+iiisii
+| Name | Description | Type | Remark for simulation |  Default value |
 | :-------------- | :----------------  | :-------------- | :----------------  | :-------------- | :----------------  |
 | `latency` | A delay to all data going through the proxy in ms. | HTTP field | RTT simulation; can apply seperately to up and downstream | `0` |
 | `jitter` | The delay is equal to latency +/- jitter ms. | HTTP field | set 0 |`0` |
@@ -203,8 +203,8 @@ see   [Technical Blogs](technical_blogs/README.md)  for more development story!
 
 Author: Eva Liu; lj2liu@uwaterloo.ca
 Initially for job seeking + reviewing & learning DB & distributed sys purpose
-ChatGPT assistance in: 
- 1. Grammar and proof read of document writing. 
+ChatGPT assistance in:
+ 1. Grammar and proof read of document writing 
  2. Readability of ReadMe and comments. 
  3. Paraphrasing 80% first version of readme after techincal discussion, 0% on README across all since 3rd push 
 
