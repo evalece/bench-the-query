@@ -58,7 +58,7 @@
  [1]https://github.com/Shopify/toxiproxy?tab=readme-ov-file#http-api 
 iiisii
 | Name | Description | Type | Remark for simulation |  Default value |
-| :-------------- | :----------------  | :-------------- | :----------------  | :-------------- | :----------------  |
+| :-------------- | :----------------  | :-------------- | :----------------  | :-------------- |
 | `latency` | A delay to all data going through the proxy in ms. | HTTP field | RTT simulation; can apply seperately to up and downstream | `0` |
 | `jitter` | The delay is equal to latency +/- jitter ms. | HTTP field | set 0 |`0` |
 | `limit_data` |Closes connection if data transmitted exceeded limit.  | HTTP field | Rate limiting | `0` |
